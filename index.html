@@ -2,19 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>BE - Guide e Plotë</title>
+  <title>BE - Hartë dhe Shtetet Anëtare</title>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <style>
-    body { margin:0; font-family: Arial; background:#f4f4f4; }
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #f4f4f4;
+    }
 
     h1 {
-      text-align:center;
-      background:#2c3e50;
-      color:white;
-      margin:0;
-      padding:15px;
+      text-align: center;
+      background: #2c3e50;
+      color: white;
+      margin: 0;
+      padding: 15px;
     }
 
     #map {
@@ -22,143 +26,70 @@
       width: 100%;
     }
 
-    #infoPanel {
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 320px;
-      height: 100%;
-      background: white;
-      padding: 15px;
-      overflow:auto;
-      box-shadow: -3px 0 10px rgba(0,0,0,0.3);
-    }
-
-    #infoPanel h2 {
-      margin-top:0;
-      color:#2c3e50;
-    }
-
-    .hint {
-      font-size: 12px;
-      color: gray;
+    .info {
+      padding: 20px;
     }
   </style>
 </head>
 
 <body>
 
-<h1>Bashkimi Europian - Guide Interaktive</h1>
+<h1>Bashkimi Europian - Shtetet Anëtare</h1>
 
 <div id="map"></div>
 
-<div id="infoPanel">
-  <h2>👉 Kliko një shtet</h2>
-  <p class="hint">Informacioni i detajuar do shfaqet këtu.</p>
+<div class="info">
+  <h2>27 Shtetet e BE-së</h2>
+  <p>Kliko mbi hartë për të parë informacion për secilin shtet.</p>
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-var map = L.map('map').setView([50, 10], 4);
+  var map = L.map('map').setView([50, 10], 4);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
-}).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
 
-// 🌍 SHUMË INFORMACION PËR SHTETET E BE
-var countries = [
+  // 🟦 TË GJITHA SHTETET E BE-së
+  var countries = [
+    ["Austria", 48.2082, 16.3738, "Kryeqyteti: Vjena. E njohur për muzikën klasike."],
+    ["Belgjika", 50.8503, 4.3517, "Kryeqyteti: Brukseli. Selia e BE-së."],
+    ["Bullgaria", 42.6977, 23.3219, "Kryeqyteti: Sofja. Vend në Ballkan."],
+    ["Kroacia", 45.8150, 15.9819, "Kryeqyteti: Zagrebi. Turizëm në Adriatik."],
+    ["Qipro", 35.1856, 33.3823, "Kryeqyteti: Nikozia. Ishull në Mesdhe."],
+    ["Çekia", 50.0755, 14.4378, "Kryeqyteti: Praga. Arkitekturë historike."],
+    ["Danimarka", 55.6761, 12.5683, "Kryeqyteti: Kopenhageni. Vendi nordik."],
+    ["Estonia", 59.4370, 24.7536, "Kryeqyteti: Talini. Teknologji e avancuar."],
+    ["Finlanda", 60.1699, 24.9384, "Kryeqyteti: Helsinki. Vend i liqeneve."],
+    ["Franca", 48.8566, 2.3522, "Kryeqyteti: Parisi. Vend turistik global."],
+    ["Gjermania", 52.5200, 13.4050, "Kryeqyteti: Berlini. Ekonomi e fortë."],
+    ["Greqia", 37.9838, 23.7275, "Kryeqyteti: Athina. Djepi i qytetërimit."],
+    ["Hungaria", 47.4979, 19.0402, "Kryeqyteti: Budapesti. Lumi Danub."],
+    ["Irlanda", 53.3498, -6.2603, "Kryeqyteti: Dublini. Ishull i gjelbër."],
+    ["Italia", 41.9028, 12.4964, "Kryeqyteti: Roma. Histori e lashtë."],
+    ["Letonia", 56.9496, 24.1052, "Kryeqyteti: Riga. Qytet baltik."],
+    ["Lituania", 54.6872, 25.2797, "Kryeqyteti: Vilnius. Vend baltik."],
+    ["Luksemburgu", 49.6116, 6.1319, "Kryeqyteti: Luksemburgu. Shtet i vogël."],
+    ["Malta", 35.8989, 14.5146, "Kryeqyteti: Valletta. Ishull mesdhetar."],
+    ["Holanda", 52.3676, 4.9041, "Kryeqyteti: Amsterdami. Kanale të famshme."],
+    ["Polonia", 52.2297, 21.0122, "Kryeqyteti: Varshava. Vend i madh i BE."],
+    ["Portugalia", 38.7223, -9.1393, "Kryeqyteti: Lisbona. Në Atlantik."],
+    ["Rumania", 44.4268, 26.1025, "Kryeqyteti: Bukureshti. Karpate."],
+    ["Sllovakia", 48.1486, 17.1077, "Kryeqyteti: Bratislava. Pranë Danubit."],
+    ["Sllovenia", 46.0569, 14.5058, "Kryeqyteti: Lubjana. Natyrë e gjelbër."],
+    ["Spanja", 40.4168, -3.7038, "Kryeqyteti: Madridi. Vend turistik."],
+    ["Suedia", 59.3293, 18.0686, "Kryeqyteti: Stokholmi. Vend nordik."]
+  ];
 
-["Austria",48.2082,16.3738,
-"🇦🇹 Austria<br>Kryeqyteti: Vjena<br>Vendi alpin, i njohur për muzikën klasike (Mozart), turizmin dimëror dhe standard të lartë jetese."],
-
-["Belgjika",50.8503,4.3517,
-"🇧🇪 Belgjika<br>Kryeqyteti: Brukseli<br>Selia e BE-së, e famshme për çokollatë, birrë dhe administratë europiane."],
-
-["Bullgaria",42.6977,23.3219,
-"🇧🇬 Bullgaria<br>Kryeqyteti: Sofja<br>Vend ballkanik me histori të lashtë, male dhe kulturë ortodokse."],
-
-["Kroacia",45.8150,15.9819,
-"🇭🇷 Kroacia<br>Kryeqyteti: Zagrebi<br>E njohur për bregdetin Adriatik dhe turizmin (Dubrovnik)."],
-
-["Qipro",35.1856,33.3823,
-"🇨🇾 Qipro<br>Kryeqyteti: Nikozia<br>Ishull mesdhetar me ndikim grek dhe turk."],
-
-["Çekia",50.0755,14.4378,
-"🇨🇿 Çekia<br>Kryeqyteti: Praga<br>E famshme për arkitekturë mesjetare dhe birrën."],
-
-["Danimarka",55.6761,12.5683,
-"🇩🇰 Danimarka<br>Kryeqyteti: Kopenhageni<br>Shtet nordik me standard shumë të lartë jetese."],
-
-["Estonia",59.4370,24.7536,
-"🇪🇪 Estonia<br>Kryeqyteti: Talini<br>Një nga vendet më digjitale në botë."],
-
-["Finlanda",60.1699,24.9384,
-"🇫🇮 Finlanda<br>Kryeqyteti: Helsinki<br>E njohur për arsim të fortë dhe natyrë të pastër."],
-
-["Franca",48.8566,2.3522,
-"🇫🇷 Franca<br>Kryeqyteti: Parisi<br>Fuqi e madhe botërore, art, modë dhe turizëm."],
-
-["Gjermania",52.5200,13.4050,
-"🇩🇪 Gjermania<br>Kryeqyteti: Berlini<br>Ekonomia më e madhe e BE-së, industri e fortë."],
-
-["Greqia",37.9838,23.7275,
-"🇬🇷 Greqia<br>Kryeqyteti: Athina<br>Djepi i qytetërimit perëndimor."],
-
-["Hungaria",47.4979,19.0402,
-"🇭🇺 Hungaria<br>Kryeqyteti: Budapesti<br>Vend me Danubin dhe arkitekturë historike."],
-
-["Irlanda",53.3498,-6.2603,
-"🇮🇪 Irlanda<br>Kryeqyteti: Dublini<br>Ekonomi teknologjike dhe kulturë keltike."],
-
-["Italia",41.9028,12.4964,
-"🇮🇹 Italia<br>Kryeqyteti: Roma<br>Histori romake, art dhe ushqim i famshëm."],
-
-["Letonia",56.9496,24.1052,
-"🇱🇻 Letonia<br>Kryeqyteti: Riga<br>Vend baltik me qytete mesjetare."],
-
-["Lituania",54.6872,25.2797,
-"🇱🇹 Lituania<br>Kryeqyteti: Vilnius<br>Histori e fortë dhe natyrë e gjelbër."],
-
-["Luksemburgu",49.6116,6.1319,
-"🇱🇺 Luksemburgu<br>Kryeqyteti: Luksemburgu<br>Shumë i vogël por shumë i pasur."],
-
-["Malta",35.8989,14.5146,
-"🇲🇹 Malta<br>Kryeqyteti: Valletta<br>Ishull historik në Mesdhe."],
-
-["Holanda",52.3676,4.9041,
-"🇳🇱 Holanda<br>Kryeqyteti: Amsterdam<br>Kanale, biçikleta dhe ekonomi moderne."],
-
-["Polonia",52.2297,21.0122,
-"🇵🇱 Polonia<br>Kryeqyteti: Varshava<br>Vendi më i madh i Europës Qendrore."],
-
-["Portugalia",38.7223,-9.1393,
-"🇵🇹 Portugalia<br>Kryeqyteti: Lisbonë<br>Vend detar me histori eksplorimesh."],
-
-["Rumania",44.4268,26.1025,
-"🇷🇴 Rumania<br>Kryeqyteti: Bukureshti<br>Karpate dhe histori e pasur."],
-
-["Sllovakia",48.1486,17.1077,
-"🇸🇰 Sllovakia<br>Kryeqyteti: Bratislava<br>Vend i vogël në Europën Qendrore."],
-
-["Sllovenia",46.0569,14.5058,
-"🇸🇮 Sllovenia<br>Kryeqyteti: Lubjana<br>Natyre alpine dhe shumë e gjelbër."],
-
-["Spanja",40.4168,-3.7038,
-"🇪🇸 Spanja<br>Kryeqyteti: Madrid<br>Futboll, turizëm dhe kulturë mesdhetare."],
-
-["Suedia",59.3293,18.0686,
-"🇸🇪 Suedia<br>Kryeqyteti: Stokholm<br>Teknologji, dizajn dhe standard i lartë jetese."]
-];
-
-// 📌 MARKERS + CLICK PANEL
-countries.forEach(c => {
-  L.marker([c[1], c[2]]).addTo(map)
-    .on('click', function () {
-      document.getElementById("infoPanel").innerHTML =
-        "<h2>" + c[0] + "</h2><p>" + c[3] + "</p>";
-    });
-});
+  countries.forEach(c => {
+    L.marker([c[1], c[2]])
+      .addTo(map)
+      .bindPopup(
+        "<b>" + c[0] + "</b><br>" + c[3]
+      );
+  });
 </script>
 
 </body>
