@@ -68,6 +68,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // 🌍 SHUMË INFORMACION PËR SHTETET E BE
 var countries = [
+
 ["Austria",48.2082,16.3738,
 "🇦🇹 Austria<br>Kryeqyteti: Vjena<br>Vendi alpin, i njohur për muzikën klasike (Mozart), turizmin dimëror dhe standard të lartë jetese."],
 
@@ -150,6 +151,7 @@ var countries = [
 "🇸🇪 Suedia<br>Kryeqyteti: Stokholm<br>Teknologji, dizajn dhe standard i lartë jetese."]
 ];
 
+// 📌 MARKERS + CLICK PANEL
 countries.forEach(c => {
   L.marker([c[1], c[2]]).addTo(map)
     .on('click', function () {
