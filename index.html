@@ -2,9 +2,95 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>BE Map</title>
+  <title>BE - Hartë dhe Shtetet Anëtare</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      background: #2c3e50;
+      color: white;
+      margin: 0;
+      padding: 15px;
+    }
+
+    #map {
+      height: 520px;
+      width: 100%;
+    }
+
+    .info {
+      padding: 20px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Bashkimi Europian</h1>
+
+<h1>Bashkimi Europian - Shtetet Anëtare</h1>
+
+<div id="map"></div>
+
+<div class="info">
+  <h2>27 Shtetet e BE-së</h2>
+  <p>Kliko mbi hartë për të parë informacion për secilin shtet.</p>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  var map = L.map('map').setView([50, 10], 4);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  // 🟦 TË GJITHA SHTETET E BE-së
+  var countries = [
+    ["Austria", 48.2082, 16.3738, "Kryeqyteti: Vjena. E njohur për muzikën klasike."],
+    ["Belgjika", 50.8503, 4.3517, "Kryeqyteti: Brukseli. Selia e BE-së."],
+    ["Bullgaria", 42.6977, 23.3219, "Kryeqyteti: Sofja. Vend në Ballkan."],
+    ["Kroacia", 45.8150, 15.9819, "Kryeqyteti: Zagrebi. Turizëm në Adriatik."],
+    ["Qipro", 35.1856, 33.3823, "Kryeqyteti: Nikozia. Ishull në Mesdhe."],
+    ["Çekia", 50.0755, 14.4378, "Kryeqyteti: Praga. Arkitekturë historike."],
+    ["Danimarka", 55.6761, 12.5683, "Kryeqyteti: Kopenhageni. Vendi nordik."],
+    ["Estonia", 59.4370, 24.7536, "Kryeqyteti: Talini. Teknologji e avancuar."],
+    ["Finlanda", 60.1699, 24.9384, "Kryeqyteti: Helsinki. Vend i liqeneve."],
+    ["Franca", 48.8566, 2.3522, "Kryeqyteti: Parisi. Vend turistik global."],
+    ["Gjermania", 52.5200, 13.4050, "Kryeqyteti: Berlini. Ekonomi e fortë."],
+    ["Greqia", 37.9838, 23.7275, "Kryeqyteti: Athina. Djepi i qytetërimit."],
+    ["Hungaria", 47.4979, 19.0402, "Kryeqyteti: Budapesti. Lumi Danub."],
+    ["Irlanda", 53.3498, -6.2603, "Kryeqyteti: Dublini. Ishull i gjelbër."],
+    ["Italia", 41.9028, 12.4964, "Kryeqyteti: Roma. Histori e lashtë."],
+    ["Letonia", 56.9496, 24.1052, "Kryeqyteti: Riga. Qytet baltik."],
+    ["Lituania", 54.6872, 25.2797, "Kryeqyteti: Vilnius. Vend baltik."],
+    ["Luksemburgu", 49.6116, 6.1319, "Kryeqyteti: Luksemburgu. Shtet i vogël."],
+    ["Malta", 35.8989, 14.5146, "Kryeqyteti: Valletta. Ishull mesdhetar."],
+    ["Holanda", 52.3676, 4.9041, "Kryeqyteti: Amsterdami. Kanale të famshme."],
+    ["Polonia", 52.2297, 21.0122, "Kryeqyteti: Varshava. Vend i madh i BE."],
+    ["Portugalia", 38.7223, -9.1393, "Kryeqyteti: Lisbona. Në Atlantik."],
+    ["Rumania", 44.4268, 26.1025, "Kryeqyteti: Bukureshti. Karpate."],
+    ["Sllovakia", 48.1486, 17.1077, "Kryeqyteti: Bratislava. Pranë Danubit."],
+    ["Sllovenia", 46.0569, 14.5058, "Kryeqyteti: Lubjana. Natyrë e gjelbër."],
+    ["Spanja", 40.4168, -3.7038, "Kryeqyteti: Madridi. Vend turistik."],
+    ["Suedia", 59.3293, 18.0686, "Kryeqyteti: Stokholmi. Vend nordik."]
+  ];
+
+  countries.forEach(c => {
+    L.marker([c[1], c[2]])
+      .addTo(map)
+      .bindPopup(
+        "<b>" + c[0] + "</b><br>" + c[3]
+      );
+  });
+</script>
+
 </body>
 </html>
