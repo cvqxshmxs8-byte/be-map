@@ -37,6 +37,14 @@
 <h1>Bashkimi Europian - Shtetet Anëtare</h1>
 
 <div id="map"></div>
+countries.forEach(c => {
+  L.marker([c[1], c[2]])
+    .addTo(map)
+    .on('click', function () {
+      document.getElementById("infoPanel").innerHTML =
+        "<h2>" + c[0] + "</h2>" +
+        "<p>" + c[3] + "</p>";
+    });
 <div id="infoPanel" style="
   position: fixed;
   right: 0;
