@@ -2,69 +2,52 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>EU Guide PRO</title>
+<title>BE Guide</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <style>
-body{margin:0;font-family:Arial;background:#eef2f7;}
-h1{background:#1e3a5f;color:white;padding:15px;text-align:center;margin:0;}
+body { margin:0; font-family: Arial; }
 
-#map{height:55vh;}
+h1{
+  background:#1e3a5f;
+  color:white;
+  padding:15px;
+  margin:0;
+  text-align:center;
+}
+
+#map{ height:60vh; }
 
 #panel{
-background:white;
-padding:20px;
-border-top:4px solid #1e3a5f;
-}
-
-.tabs{
-margin-top:10px;
-}
-
-.tabs button{
-padding:10px;
-margin:5px;
-border:none;
-background:#ddd;
-cursor:pointer;
-border-radius:5px;
-}
-
-.tabs button.active{
-background:#1e3a5f;
-color:white;
+  padding:20px;
+  background:#f5f5f5;
 }
 
 .card{
-background:#fff;
-padding:15px;
-margin-top:10px;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  background:white;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-img{
-border-radius:10px;
-margin-top:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Bashkimi Europian - Guide Profesional</h1>
+<h1>Bashkimi Europian - 27 Shtetet</h1>
 
 <div id="map"></div>
 
 <div id="panel">
-<h2>Kliko një shtet në hartë</h2>
+  <h2>Kliko një shtet</h2>
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -72,96 +55,53 @@ margin-top:10px;
 <script>
 
 var map = L.map('map').setView([50,10],4);
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-function showTab(id){
-document.querySelectorAll('.tab').forEach(t=>t.style.display='none');
-document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-document.getElementById(id).style.display='block';
-event.target.classList.add('active');
-}
-
-function createPage(c){
-return <h2>${c.flag} ${c.name}</h2>  <img src="${c.img}" width="100%">  <div class="tabs"> <button class="active" onclick="showTab('info')">Përmbledhje</button> <button onclick="showTab('eco')">Ekonomia</button> <button onclick="showTab('cul')">Kultura</button> <button onclick="showTab('his')">Historia</button> </div>  <div id="info" class="tab"> <div class="card"> <b>Kryeqyteti:</b> ${c.capital}<br> <b>Popullsia:</b> ${c.population}<br> <b>Monedha:</b> Euro </div> </div>  <div id="eco" class="tab" style="display:none"> <div class="card">${c.economy}</div> </div>  <div id="cul" class="tab" style="display:none"> <div class="card">${c.culture}</div> </div>  <div id="his" class="tab" style="display:none"> <div class="card">${c.history}</div> </div>;
-}
 
 var countries = [
 
-{
-name:"Franca",
-lat:48.85,lng:2.35,
-flag:"🇫🇷",
-img:"https://upload.wikimedia.org/wikipedia/commons/c/c3/Eiffel_Tower.jpg",
-capital:"Paris",
-population:"68 milion",
-economy:"Një nga ekonomitë më të mëdha në botë.",
-culture:"Art, modë dhe muze si Louvre.",
-history:"Revolucioni Francez ndikoi gjithë Europën."
-},
+["Franca",48.8566,2.3522,`
+<h2>🇫🇷 Franca</h2>
 
-{
-name:"Gjermania",
-lat:52.52,lng:13.40,
-flag:"🇩🇪",
-img:"https://upload.wikimedia.org/wikipedia/commons/d/d9/Berlin_Brandenburg_Gate.jpg",
-capital:"Berlin",
-population:"84 milion",
-economy:"Ekonomia më e fortë në BE.",
-culture:"Inxhinieri dhe teknologji.",
-history:"Rol kyç në historinë europiane."
-},
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Eiffel_Tower.jpg" width="100%">
 
-{
-name:"Italia",
-lat:41.9,lng:12.49,
-flag:"🇮🇹",
-img:"https://upload.wikimedia.org/wikipedia/commons/d/d5/Colosseum.jpg",
-capital:"Roma",
-population:"59 milion",
-economy:"Turizëm dhe industri mode.",
-culture:"Art, muzikë dhe kuzhinë.",
-history:"Qendra e Perandorisë Romake."
-},
+<div class="card">
+<b>Kryeqyteti:</b> Paris<br>
+<b>Popullsia:</b> ~68 milion<br>
+<b>Gjuha:</b> Frëngjisht
+</div>
 
-{
-name:"Spanja",
-lat:40.41,lng:-3.70,
-flag:"🇪🇸",
-img:"https://upload.wikimedia.org/wikipedia/commons/9/9a/Sagrada_Familia.jpg",
-capital:"Madrid",
-population:"48 milion",
-economy:"Turizëm dhe shërbime.",
-culture:"Flamenco dhe futboll.",
-history:"Perandori koloniale."
-},
+<div class="grid">
+<div class="card"><b>Ekonomia</b><br>Franca është ndër ekonomitë më të mëdha në botë.</div>
+<div class="card"><b>Kultura</b><br>Art, modë, muze si Louvre.</div>
+<div class="card"><b>Turizmi</b><br>Mbi 90 milion turistë çdo vit.</div>
+<div class="card"><b>Historia</b><br>Revolucioni Francez dhe ndikim global.</div>
+</div>
 
-{
-name:"Greqia",
-lat:37.98,lng:23.72,
-flag:"🇬🇷",
-img:"https://upload.wikimedia.org/wikipedia/commons/d/d1/Acropolis.jpg",
-capital:"Athina",
-population:"10 milion",
-economy:"Turizëm dhe detari.",
-culture:"Filozofi dhe art antik.",
-history:"Djepi i demokracisë."
-},
+<div class="card">
+<b>Fakte:</b><br>
+- Ka mbi 1500 lloje djathi<br>
+- Paris = qyteti i dashurisë<br>
+- Një nga vendet themeluese të BE
+</div>
+`],
 
-// ⚠️ të tjerat janë më të shkurtra që faqja të mos bëhet e rëndë
-{name:"Austria",lat:48.2,lng:16.37,flag:"🇦🇹",img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Vienna.jpg",capital:"Vjena",population:"9M",economy:"E zhvilluar",culture:"Muzikë klasike",history:"Perandori e vjetër"},
-{name:"Belgjika",lat:50.85,lng:4.35,flag:"🇧🇪",img:"https://upload.wikimedia.org/wikipedia/commons/6/6b/Brussels.jpg",capital:"Bruksel",population:"11M",economy:"Qendër BE",culture:"Çokollatë",history:"Vend strategjik"},
-{name:"Holanda",lat:52.36,lng:4.9,flag:"🇳🇱",img:"https://upload.wikimedia.org/wikipedia/commons/1/1c/Amsterdam.jpg",capital:"Amsterdam",population:"17M",economy:"Moderne",culture:"Kanale",history:"Tregti"},
-{name:"Polonia",lat:52.22,lng:21.01,flag:"🇵🇱",img:"https://upload.wikimedia.org/wikipedia/commons/2/2c/Warsaw.jpg",capital:"Varshava",population:"38M",economy:"Në rritje",culture:"Tradita",history:"Rezistente"},
-{name:"Portugalia",lat:38.72,lng:-9.13,flag:"🇵🇹",img:"https://upload.wikimedia.org/wikipedia/commons/3/3a/Lisbon.jpg",capital:"Lisbonë",population:"10M",economy:"Detare",culture:"Fado",history:"Eksplorime"}
+["Gjermania",52.52,13.405,`
+<h2>🇩🇪 Gjermania</h2>
 
-// 👉 mund t’i kopjosh dhe shtosh të tjerat njësoj (të njëjtin model)
+<div class="card">
+Kryeqyteti: Berlin<br>
+Ekonomia më e fortë në Europë.
+</div>
+`]
+
 ];
 
 countries.forEach(c=>{
-L.marker([c.lat,c.lng]).addTo(map)
-.on('click',()=>{
-document.getElementById("panel").innerHTML = createPage(c);
-});
+  L.marker([c[1],c[2]]).addTo(map)
+  .on('click', function(){
+    document.getElementById("panel").innerHTML = c[3];
+  });
 });
 
 </script>
