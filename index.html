@@ -60,59 +60,86 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var countries = [
 
-["Austria",48.2082,16.3738,"<img src='https://flagcdn.com/w40/at.png'> <b>Austria</b><br>Kryeqyteti: Vjena<br>Vendi alpin, muzikë klasike dhe turizëm dimëror."],
+["Austria",48.2082,16.3738,
+"🇦🇹 Austria<br>Kryeqyteti: Vjena<br>Vendi alpin, i njohur për muzikën klasike (Mozart), turizmin dimëror dhe standard të lartë jetese."],
 
-["Belgjika",50.8503,4.3517,"<img src='https://flagcdn.com/w40/be.png'> <b>Belgjika</b><br>Kryeqyteti: Brukseli<br>Selia e BE-së, çokollatë dhe birrë."],
+["Belgjika",50.8503,4.3517,
+"🇧🇪 Belgjika<br>Kryeqyteti: Brukseli<br>Selia e BE-së, e famshme për çokollatë, birrë dhe administratë europiane."],
 
-["Bullgaria",42.6977,23.3219,"<img src='https://flagcdn.com/w40/bg.png'> <b>Bullgaria</b><br>Kryeqyteti: Sofja<br>Vend ballkanik me histori të lashtë."],
+["Bullgaria",42.6977,23.3219,
+"🇧🇬 Bullgaria<br>Kryeqyteti: Sofja<br>Vend ballkanik me histori të lashtë, male dhe kulturë ortodokse."],
 
-["Kroacia",45.8150,15.9819,"<img src='https://flagcdn.com/w40/hr.png'> <b>Kroacia</b><br>Kryeqyteti: Zagrebi<br>Bregdet Adriatik dhe turizëm (Dubrovnik)."],
+["Kroacia",45.8150,15.9819,
+"🇭🇷 Kroacia<br>Kryeqyteti: Zagrebi<br>E njohur për bregdetin Adriatik dhe turizmin (Dubrovnik)."],
 
-["Qipro",35.1856,33.3823,"<img src='https://flagcdn.com/w40/cy.png'> <b>Qipro</b><br>Kryeqyteti: Nikozia<br>Ishull mesdhetar me kulturë greke/turke."],
+["Qipro",35.1856,33.3823,
+"🇨🇾 Qipro<br>Kryeqyteti: Nikozia<br>Ishull mesdhetar me ndikim grek dhe turk."],
 
-["Çekia",50.0755,14.4378,"<img src='https://flagcdn.com/w40/cz.png'> <b>Çekia</b><br>Kryeqyteti: Praga<br>Arkitekturë mesjetare dhe birrë e famshme."],
+["Çekia",50.0755,14.4378,
+"🇨🇿 Çekia<br>Kryeqyteti: Praga<br>E famshme për arkitekturë mesjetare dhe birrën."],
 
-["Danimarka",55.6761,12.5683,"<img src='https://flagcdn.com/w40/dk.png'> <b>Danimarka</b><br>Kryeqyteti: Kopenhageni<br>Shtet nordik me standard të lartë jetese."],
+["Danimarka",55.6761,12.5683,
+"🇩🇰 Danimarka<br>Kryeqyteti: Kopenhageni<br>Shtet nordik me standard shumë të lartë jetese."],
 
-["Estonia",59.4370,24.7536,"<img src='https://flagcdn.com/w40/ee.png'> <b>Estonia</b><br>Kryeqyteti: Talini<br>Një nga vendet më digjitale në botë."],
+["Estonia",59.4370,24.7536,
+"🇪🇪 Estonia<br>Kryeqyteti: Talini<br>Një nga vendet më digjitale në botë."],
 
-["Finlanda",60.1699,24.9384,"<img src='https://flagcdn.com/w40/fi.png'> <b>Finlanda</b><br>Kryeqyteti: Helsinki<br>Arsim i fortë dhe natyrë e pastër."],
+["Finlanda",60.1699,24.9384,
+"🇫🇮 Finlanda<br>Kryeqyteti: Helsinki<br>E njohur për arsim të fortë dhe natyrë të pastër."],
 
-["Franca",48.8566,2.3522,"<img src='https://flagcdn.com/w40/fr.png'> <b>Franca</b><br>Kryeqyteti: Parisi<br>Art, modë, turizëm dhe ekonomi e madhe."],
+["Franca",48.8566,2.3522,
+"🇫🇷 Franca<br>Kryeqyteti: Parisi<br>Fuqi e madhe botërore, art, modë dhe turizëm."],
 
-["Gjermania",52.5200,13.4050,"<img src='https://flagcdn.com/w40/de.png'> <b>Gjermania</b><br>Kryeqyteti: Berlini<br>Ekonomia më e fortë në BE."],
+["Gjermania",52.5200,13.4050,
+"🇩🇪 Gjermania<br>Kryeqyteti: Berlini<br>Ekonomia më e madhe e BE-së, industri e fortë."],
 
-["Greqia",37.9838,23.7275,"<img src='https://flagcdn.com/w40/gr.png'> <b>Greqia</b><br>Kryeqyteti: Athina<br>Djepi i qytetërimit perëndimor."],
+["Greqia",37.9838,23.7275,
+"🇬🇷 Greqia<br>Kryeqyteti: Athina<br>Djepi i qytetërimit perëndimor."],
 
-["Hungaria",47.4979,19.0402,"<img src='https://flagcdn.com/w40/hu.png'> <b>Hungaria</b><br>Kryeqyteti: Budapesti<br>Danubi dhe arkitekturë historike."],
+["Hungaria",47.4979,19.0402,
+"🇭🇺 Hungaria<br>Kryeqyteti: Budapesti<br>Vend me Danubin dhe arkitekturë historike."],
 
-["Irlanda",53.3498,-6.2603,"<img src='https://flagcdn.com/w40/ie.png'> <b>Irlanda</b><br>Kryeqyteti: Dublini<br>Ekonomi teknologjike dhe kulturë keltike."],
+["Irlanda",53.3498,-6.2603,
+"🇮🇪 Irlanda<br>Kryeqyteti: Dublini<br>Ekonomi teknologjike dhe kulturë keltike."],
 
-["Italia",41.9028,12.4964,"<img src='https://flagcdn.com/w40/it.png'> <b>Italia</b><br>Kryeqyteti: Roma<br>Histori romake, art dhe ushqim i famshëm."],
+["Italia",41.9028,12.4964,
+"🇮🇹 Italia<br>Kryeqyteti: Roma<br>Histori romake, art dhe ushqim i famshëm."],
 
-["Letonia",56.9496,24.1052,"<img src='https://flagcdn.com/w40/lv.png'> <b>Letonia</b><br>Kryeqyteti: Riga<br>Qytete mesjetare dhe Baltik."],
+["Letonia",56.9496,24.1052,
+"🇱🇻 Letonia<br>Kryeqyteti: Riga<br>Vend baltik me qytete mesjetare."],
 
-["Lituania",54.6872,25.2797,"<img src='https://flagcdn.com/w40/lt.png'> <b>Lituania</b><br>Kryeqyteti: Vilnius<br>Histori e fortë dhe natyrë e gjelbër."],
+["Lituania",54.6872,25.2797,
+"🇱🇹 Lituania<br>Kryeqyteti: Vilnius<br>Histori e fortë dhe natyrë e gjelbër."],
 
-["Luksemburgu",49.6116,6.1319,"<img src='https://flagcdn.com/w40/lu.png'> <b>Luksemburgu</b><br>Kryeqyteti: Luksemburgu<br>Shumë i vogël por shumë i pasur."],
+["Luksemburgu",49.6116,6.1319,
+"🇱🇺 Luksemburgu<br>Kryeqyteti: Luksemburgu<br>Shumë i vogël por shumë i pasur."],
 
-["Malta",35.8989,14.5146,"<img src='https://flagcdn.com/w40/mt.png'> <b>Malta</b><br>Kryeqyteti: Valletta<br>Ishull historik në Mesdhe."],
+["Malta",35.8989,14.5146,
+"🇲🇹 Malta<br>Kryeqyteti: Valletta<br>Ishull historik në Mesdhe."],
 
-["Holanda",52.3676,4.9041,"<img src='https://flagcdn.com/w40/nl.png'> <b>Holanda</b><br>Kryeqyteti: Amsterdam<br>Kanale, biçikleta dhe ekonomi moderne."],
+["Holanda",52.3676,4.9041,
+"🇳🇱 Holanda<br>Kryeqyteti: Amsterdam<br>Kanale, biçikleta dhe ekonomi moderne."],
 
-["Polonia",52.2297,21.0122,"<img src='https://flagcdn.com/w40/pl.png'> <b>Polonia</b><br>Kryeqyteti: Varshava<br>Vend i madh në Europën Qendrore."],
+["Polonia",52.2297,21.0122,
+"🇵🇱 Polonia<br>Kryeqyteti: Varshava<br>Vendi më i madh i Europës Qendrore."],
 
-["Portugalia",38.7223,-9.1393,"<img src='https://flagcdn.com/w40/pt.png'> <b>Portugalia</b><br>Kryeqyteti: Lisbonë<br>Vend detar me histori eksplorimi."],
+["Portugalia",38.7223,-9.1393,
+"🇵🇹 Portugalia<br>Kryeqyteti: Lisbonë<br>Vend detar me histori eksplorimesh."],
 
-["Rumania",44.4268,26.1025,"<img src='https://flagcdn.com/w40/ro.png'> <b>Rumania</b><br>Kryeqyteti: Bukureshti<br>Karpate dhe histori e pasur."],
+["Rumania",44.4268,26.1025,
+"🇷🇴 Rumania<br>Kryeqyteti: Bukureshti<br>Karpate dhe histori e pasur."],
 
-["Sllovakia",48.1486,17.1077,"<img src='https://flagcdn.com/w40/sk.png'> <b>Sllovakia</b><br>Kryeqyteti: Bratislava<br>Vend i vogël në Europën Qendrore."],
+["Sllovakia",48.1486,17.1077,
+"🇸🇰 Sllovakia<br>Kryeqyteti: Bratislava<br>Vend i vogël në Europën Qendrore."],
 
-["Sllovenia",46.0569,14.5058,"<img src='https://flagcdn.com/w40/si.png'> <b>Sllovenia</b><br>Kryeqyteti: Lubjana<br>Natyre alpine dhe shumë e gjelbër."],
+["Sllovenia",46.0569,14.5058,
+"🇸🇮 Sllovenia<br>Kryeqyteti: Lubjana<br>Natyre alpine dhe shumë e gjelbër."],
 
-["Spanja",40.4168,-3.7038,"<img src='https://flagcdn.com/w40/es.png'> <b>Spanja</b><br>Kryeqyteti: Madrid<br>Futboll, turizëm dhe kulturë mesdhetare."],
+["Spanja",40.4168,-3.7038,
+"🇪🇸 Spanja<br>Kryeqyteti: Madrid<br>Futboll, turizëm dhe kulturë mesdhetare."],
 
-["Suedia",59.3293,18.0686,"<img src='https://flagcdn.com/w40/se.png'> <b>Suedia</b><br>Kryeqyteti: Stokholm<br>Teknologji dhe standard i lartë jetese."]
+["Suedia",59.3293,18.0686,
+"🇸🇪 Suedia<br>Kryeqyteti: Stokholm<br>Teknologji, dizajn dhe standard i lartë jetese."]
 ];
 
 countries.forEach(c=>{
