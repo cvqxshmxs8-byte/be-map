@@ -59,33 +59,60 @@ var map = L.map('map').setView([50,10],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var countries = [
-{name:"Austria",lat:48.2082,lng:16.3738,flag:"🇦🇹",img:"https://flagcdn.com/w320/at.png",capital:"Vjenë",population:"9.1M",economy:"Ekonomi e zhvilluar, turizëm alpin, industri shërbimesh.",culture:"Muzikë klasike, opera, trashëgimi perandorake."},
-{name:"Belgjika",lat:50.8503,lng:4.3517,flag:"🇧🇪",img:"https://flagcdn.com/w320/be.png",capital:"Bruksel",population:"11.7M",economy:"Qendër e institucioneve të BE, shërbime dhe industri.",culture:"Çokollatë, birrë, komikë (Tintin)."},
-{name:"Bullgaria",lat:42.6977,lng:23.3219,flag:"🇧🇬",img:"https://flagcdn.com/w320/bg.png",capital:"Sofje",population:"6.4M",economy:"Në zhvillim, IT dhe industri të lehta.",culture:"Folklor ballkanik, histori e lashtë."},
-{name:"Kroacia",lat:45.8150,lng:15.9819,flag:"🇭🇷",img:"https://flagcdn.com/w320/hr.png",capital:"Zagreb",population:"3.9M",economy:"Turizëm bregdetar, shërbime.",culture:"Adriatiku, qytete historike."},
-{name:"Qipro",lat:35.1856,lng:33.3823,flag:"🇨🇾",img:"https://flagcdn.com/w320/cy.png",capital:"Nikozia",population:"1.2M",economy:"Turizëm, shërbime financiare.",culture:"Ndikim grek/turk, mesdhetar."},
-{name:"Çekia",lat:50.0755,lng:14.4378,flag:"🇨🇿",img:"https://flagcdn.com/w320/cz.png",capital:"Pragë",population:"10.7M",economy:"Industri dhe eksport, automjete.",culture:"Arkitekturë gotike, birrë e famshme."},
-{name:"Danimarka",lat:55.6761,lng:12.5683,flag:"🇩🇰",img:"https://flagcdn.com/w320/dk.png",capital:"Kopenhagen",population:"5.9M",economy:"Inovacion, energji e gjelbër.",culture:"Dizajn nordik, cilësi jete e lartë."},
-{name:"Estonia",lat:59.4370,lng:24.7536,flag:"🇪🇪",img:"https://flagcdn.com/w320/ee.png",capital:"Talinn",population:"1.3M",economy:"Shtet digjital, IT.",culture:"Mesjetë + teknologji moderne."},
-{name:"Finlanda",lat:60.1699,lng:24.9384,flag:"🇫🇮",img:"https://flagcdn.com/w320/fi.png",capital:"Helsinki",population:"5.6M",economy:"Arsim i fortë, industri teknologjike.",culture:"Sauna, natyrë, dizajn."},
-{name:"Franca",lat:48.8566,lng:2.3522,flag:"🇫🇷",img:"https://flagcdn.com/w320/fr.png",capital:"Paris",population:"68M",economy:"Një nga më të mëdhatë globalisht.",culture:"Art, modë, kuzhinë."},
-{name:"Gjermania",lat:52.52,lng:13.405,flag:"🇩🇪",img:"https://flagcdn.com/w320/de.png",capital:"Berlin",population:"84M",economy:"Më e forta në BE, industri e avancuar.",culture:"Inxhinieri, muzikë, festivale."},
-{name:"Greqia",lat:37.9838,lng:23.7275,flag:"🇬🇷",img:"https://flagcdn.com/w320/gr.png",capital:"Athinë",population:"10.4M",economy:"Turizëm, detari.",culture:"Antikitet, filozofi."},
-{name:"Hungaria",lat:47.4979,lng:19.0402,flag:"🇭🇺",img:"https://flagcdn.com/w320/hu.png",capital:"Budapest",population:"9.6M",economy:"Prodhim, shërbime.",culture:"Banjo termale, arkitekturë."},
-{name:"Irlanda",lat:53.3498,lng:-6.2603,flag:"🇮🇪",img:"https://flagcdn.com/w320/ie.png",capital:"Dublin",population:"5.2M",economy:"Tech hub (multinacionale).",culture:"Keltike, muzikë, pub-e."},
-{name:"Italia",lat:41.9028,lng:12.4964,flag:"🇮🇹",img:"https://flagcdn.com/w320/it.png",capital:"Romë",population:"59M",economy:"Turizëm, modë, industri.",culture:"Art, histori romake, kuzhinë."},
-{name:"Letonia",lat:56.9496,lng:24.1052,flag:"🇱🇻",img:"https://flagcdn.com/w320/lv.png",capital:"Riga",population:"1.9M",economy:"Shërbime, IT.",culture:"Baltike, arkitekturë art nouveau."},
-{name:"Lituania",lat:54.6872,lng:25.2797,flag:"🇱🇹",img:"https://flagcdn.com/w320/lt.png",capital:"Vilnius",population:"2.8M",economy:"Në rritje, prodhim.",culture:"Historike, e gjelbër."},
-{name:"Luksemburgu",lat:49.6116,lng:6.1319,flag:"🇱🇺",img:"https://flagcdn.com/w320/lu.png",capital:"Luksemburg",population:"0.65M",economy:"Financa, shumë i pasur.",culture:"Multilinguizëm."},
-{name:"Malta",lat:35.8989,lng:14.5146,flag:"🇲🇹",img:"https://flagcdn.com/w320/mt.png",capital:"Valletta",population:"0.5M",economy:"Turizëm, shërbime.",culture:"Mesdhetare, histori kalorësish."},
-{name:"Holanda",lat:52.3676,lng:4.9041,flag:"🇳🇱",img:"https://flagcdn.com/w320/nl.png",capital:"Amsterdam",population:"17.9M",economy:"Tregti, logjistikë.",culture:"Kanale, biçikleta."},
-{name:"Polonia",lat:52.2297,lng:21.0122,flag:"🇵🇱",img:"https://flagcdn.com/w320/pl.png",capital:"Varshavë",population:"38M",economy:"Në rritje të shpejtë.",culture:"Tradita, histori e fortë."},
-{name:"Portugalia",lat:38.7223,lng:-9.1393,flag:"🇵🇹",img:"https://flagcdn.com/w320/pt.png",capital:"Lisbonë",population:"10.3M",economy:"Turizëm, shërbime.",culture:"Fado, detari."},
-{name:"Rumania",lat:44.4268,lng:26.1025,flag:"🇷🇴",img:"https://flagcdn.com/w320/ro.png",capital:"Bukuresht",population:"19M",economy:"IT, prodhim.",culture:"Karpate, folklor."},
-{name:"Sllovakia",lat:48.1486,lng:17.1077,flag:"🇸🇰",img:"https://flagcdn.com/w320/sk.png",capital:"Bratislavë",population:"5.4M",economy:"Automotive, industri.",culture:"Qendra historike."},
-{name:"Sllovenia",lat:46.0569,lng:14.5058,flag:"🇸🇮",img:"https://flagcdn.com/w320/si.png",capital:"Lubjanë",population:"2.1M",economy:"E qëndrueshme, turizëm.",culture:"Alpe + Adriatik."},
-{name:"Spanja",lat:40.4168,lng:-3.7038,flag:"🇪🇸",img:"https://flagcdn.com/w320/es.png",capital:"Madrid",population:"48M",economy:"Turizëm, shërbime.",culture:"Flamenco, sport."},
-{name:"Suedia",lat:59.3293,lng:18.0686,flag:"🇸🇪",img:"https://flagcdn.com/w320/se.png",capital:"Stokholm",population:"10.5M",economy:"Inovacion, teknologji.",culture:"Dizajn nordik, mirëqenie."}
+
+["Austria",48.2082,16.3738,"<img src='https://flagcdn.com/w40/at.png'> <b>Austria</b><br>Kryeqyteti: Vjena<br>Vendi alpin, muzikë klasike dhe turizëm dimëror."],
+
+["Belgjika",50.8503,4.3517,"<img src='https://flagcdn.com/w40/be.png'> <b>Belgjika</b><br>Kryeqyteti: Brukseli<br>Selia e BE-së, çokollatë dhe birrë."],
+
+["Bullgaria",42.6977,23.3219,"<img src='https://flagcdn.com/w40/bg.png'> <b>Bullgaria</b><br>Kryeqyteti: Sofja<br>Vend ballkanik me histori të lashtë."],
+
+["Kroacia",45.8150,15.9819,"<img src='https://flagcdn.com/w40/hr.png'> <b>Kroacia</b><br>Kryeqyteti: Zagrebi<br>Bregdet Adriatik dhe turizëm (Dubrovnik)."],
+
+["Qipro",35.1856,33.3823,"<img src='https://flagcdn.com/w40/cy.png'> <b>Qipro</b><br>Kryeqyteti: Nikozia<br>Ishull mesdhetar me kulturë greke/turke."],
+
+["Çekia",50.0755,14.4378,"<img src='https://flagcdn.com/w40/cz.png'> <b>Çekia</b><br>Kryeqyteti: Praga<br>Arkitekturë mesjetare dhe birrë e famshme."],
+
+["Danimarka",55.6761,12.5683,"<img src='https://flagcdn.com/w40/dk.png'> <b>Danimarka</b><br>Kryeqyteti: Kopenhageni<br>Shtet nordik me standard të lartë jetese."],
+
+["Estonia",59.4370,24.7536,"<img src='https://flagcdn.com/w40/ee.png'> <b>Estonia</b><br>Kryeqyteti: Talini<br>Një nga vendet më digjitale në botë."],
+
+["Finlanda",60.1699,24.9384,"<img src='https://flagcdn.com/w40/fi.png'> <b>Finlanda</b><br>Kryeqyteti: Helsinki<br>Arsim i fortë dhe natyrë e pastër."],
+
+["Franca",48.8566,2.3522,"<img src='https://flagcdn.com/w40/fr.png'> <b>Franca</b><br>Kryeqyteti: Parisi<br>Art, modë, turizëm dhe ekonomi e madhe."],
+
+["Gjermania",52.5200,13.4050,"<img src='https://flagcdn.com/w40/de.png'> <b>Gjermania</b><br>Kryeqyteti: Berlini<br>Ekonomia më e fortë në BE."],
+
+["Greqia",37.9838,23.7275,"<img src='https://flagcdn.com/w40/gr.png'> <b>Greqia</b><br>Kryeqyteti: Athina<br>Djepi i qytetërimit perëndimor."],
+
+["Hungaria",47.4979,19.0402,"<img src='https://flagcdn.com/w40/hu.png'> <b>Hungaria</b><br>Kryeqyteti: Budapesti<br>Danubi dhe arkitekturë historike."],
+
+["Irlanda",53.3498,-6.2603,"<img src='https://flagcdn.com/w40/ie.png'> <b>Irlanda</b><br>Kryeqyteti: Dublini<br>Ekonomi teknologjike dhe kulturë keltike."],
+
+["Italia",41.9028,12.4964,"<img src='https://flagcdn.com/w40/it.png'> <b>Italia</b><br>Kryeqyteti: Roma<br>Histori romake, art dhe ushqim i famshëm."],
+
+["Letonia",56.9496,24.1052,"<img src='https://flagcdn.com/w40/lv.png'> <b>Letonia</b><br>Kryeqyteti: Riga<br>Qytete mesjetare dhe Baltik."],
+
+["Lituania",54.6872,25.2797,"<img src='https://flagcdn.com/w40/lt.png'> <b>Lituania</b><br>Kryeqyteti: Vilnius<br>Histori e fortë dhe natyrë e gjelbër."],
+
+["Luksemburgu",49.6116,6.1319,"<img src='https://flagcdn.com/w40/lu.png'> <b>Luksemburgu</b><br>Kryeqyteti: Luksemburgu<br>Shumë i vogël por shumë i pasur."],
+
+["Malta",35.8989,14.5146,"<img src='https://flagcdn.com/w40/mt.png'> <b>Malta</b><br>Kryeqyteti: Valletta<br>Ishull historik në Mesdhe."],
+
+["Holanda",52.3676,4.9041,"<img src='https://flagcdn.com/w40/nl.png'> <b>Holanda</b><br>Kryeqyteti: Amsterdam<br>Kanale, biçikleta dhe ekonomi moderne."],
+
+["Polonia",52.2297,21.0122,"<img src='https://flagcdn.com/w40/pl.png'> <b>Polonia</b><br>Kryeqyteti: Varshava<br>Vend i madh në Europën Qendrore."],
+
+["Portugalia",38.7223,-9.1393,"<img src='https://flagcdn.com/w40/pt.png'> <b>Portugalia</b><br>Kryeqyteti: Lisbonë<br>Vend detar me histori eksplorimi."],
+
+["Rumania",44.4268,26.1025,"<img src='https://flagcdn.com/w40/ro.png'> <b>Rumania</b><br>Kryeqyteti: Bukureshti<br>Karpate dhe histori e pasur."],
+
+["Sllovakia",48.1486,17.1077,"<img src='https://flagcdn.com/w40/sk.png'> <b>Sllovakia</b><br>Kryeqyteti: Bratislava<br>Vend i vogël në Europën Qendrore."],
+
+["Sllovenia",46.0569,14.5058,"<img src='https://flagcdn.com/w40/si.png'> <b>Sllovenia</b><br>Kryeqyteti: Lubjana<br>Natyre alpine dhe shumë e gjelbër."],
+
+["Spanja",40.4168,-3.7038,"<img src='https://flagcdn.com/w40/es.png'> <b>Spanja</b><br>Kryeqyteti: Madrid<br>Futboll, turizëm dhe kulturë mesdhetare."],
+
+["Suedia",59.3293,18.0686,"<img src='https://flagcdn.com/w40/se.png'> <b>Suedia</b><br>Kryeqyteti: Stokholm<br>Teknologji dhe standard i lartë jetese."]
 ];
 
 countries.forEach(c=>{
