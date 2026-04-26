@@ -1,129 +1,197 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>BE - Hartë dhe Shtetet Anëtare</title>
+<meta charset="utf-8">
+<title>EU Guide ULTRA</title>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
-  <style>
-    body {
-      <div id="fullPage" style="
-display:none;
+<style>
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont;
+background:#e9eef5;
+overflow:hidden;
+}
+
+/* HEADER /
+header{
+background:rgba(30,58,95,0.9);
+color:white;
+padding:15px;
+text-align:center;
+backdrop-filter:blur(10px);
+}
+
+/ MAP /
+#map{height:50vh}
+
+/ BOTTOM PANEL (IPHONE STYLE) /
+#panel{
 position:fixed;
-top:0;
+bottom:0;
 left:0;
 width:100%;
-height:100%;
-background:white;
-z-index:9999;
+height:40%;
+background:rgba(255,255,255,0.9);
+backdrop-filter:blur(20px);
+border-radius:20px 20px 0 0;
+padding:15px;
 overflow:auto;
-padding:20px;
-">
+transform:translateY(100%);
+transition:0.4s;
+}
 
-<button onclick="closePage()" style="
-padding:10px;
-background:red;
-color:white;
+/ ACTIVE PANEL /
+#panel.active{
+transform:translateY(0);
+}
+
+/ CARD /
+.card{
+background:white;
+padding:12px;
+margin-top:10px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/ TABS /
+.tabs{
+display:flex;
+gap:5px;
+margin-top:10px;
+}
+
+.tabs button{
+flex:1;
+padding:8px;
 border:none;
-margin-bottom:10px;
-">Mbyll</button>
+border-radius:10px;
+background:#ddd;
+}
 
-<div id="content"></div>
+.tabs button.active{
+background:#1e3a5f;
+color:white;
+}
 
-</div>
-      font-family: Arial;
-      margin: 0;
-      background: #f4f4f4;
-    }
-
-    h1 {
-      text-align: center;
-      background: #2c3e50;
-      color: white;
-      margin: 0;
-      padding: 15px;
-    }
-
-    #map {
-      height: 520px;
-      width: 100%;
-    }
-
-    .info {
-      padding: 20px;
-    }
-  </style>
+/ SEARCH FLOAT /
+#search{
+position:absolute;
+top:70px;
+left:10px;
+width:200px;
+padding:8px;
+border-radius:10px;
+border:none;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+</style>
 </head>
 
 <body>
 
-<h1>Bashkimi Europian - Shtetet Anëtare</h1>
+<header>🇪🇺 EU Guide</header>
+
+<input id="search" placeholder="Kërko...">
 
 <div id="map"></div>
 
-<div class="info">
-  <h2>27 Shtetet e BE-së</h2>
-  <p>Kliko mbi hartë për të parë informacion për secilin shtet.</p>
-</div>
+<div id="panel"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js">
-function openPage(info){
-  document.getElementById("fullPage").style.display = "block";
-  document.getElementById("content").innerHTML = info;
-}
-
-function closePage(){
-  document.getElementById("fullPage").style.display = "none";
-}
-</script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-  var map = L.map('map').setView([50, 10], 4);
+var map = L.map('map').setView([50,10],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
-  }).addTo(map);
+/ TAB SWITCH /
+function showTab(id){
+document.querySelectorAll('.tab').forEach(t=>t.style.display='none');
+document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).style.display='block';
+event.target.classList.add('active');
+}
 
-  // 🟦 TË GJITHA SHTETET E BE-së
-  var countries = [
-    ["Austria", 48.2082, 16.3738, "Kryeqyteti: Vjena. E njohur për muzikën klasike."],
-    ["Belgjika", 50.8503, 4.3517, "Kryeqyteti: Brukseli. Selia e BE-së."],
-    ["Bullgaria", 42.6977, 23.3219, "Kryeqyteti: Sofja. Vend në Ballkan."],
-    ["Kroacia", 45.8150, 15.9819, "Kryeqyteti: Zagrebi. Turizëm në Adriatik."],
-    ["Qipro", 35.1856, 33.3823, "Kryeqyteti: Nikozia. Ishull në Mesdhe."],
-    ["Çekia", 50.0755, 14.4378, "Kryeqyteti: Praga. Arkitekturë historike."],
-    ["Danimarka", 55.6761, 12.5683, "Kryeqyteti: Kopenhageni. Vendi nordik."],
-    ["Estonia", 59.4370, 24.7536, "Kryeqyteti: Talini. Teknologji e avancuar."],
-    ["Finlanda", 60.1699, 24.9384, "Kryeqyteti: Helsinki. Vend i liqeneve."],
-    ["Franca", 48.8566, 2.3522, "Kryeqyteti: Parisi. Vend turistik global."],
-    ["Gjermania", 52.5200, 13.4050, "Kryeqyteti: Berlini. Ekonomi e fortë."],
-    ["Greqia", 37.9838, 23.7275, "Kryeqyteti: Athina. Djepi i qytetërimit."],
-    ["Hungaria", 47.4979, 19.0402, "Kryeqyteti: Budapesti. Lumi Danub."],
-    ["Irlanda", 53.3498, -6.2603, "Kryeqyteti: Dublini. Ishull i gjelbër."],
-    ["Italia", 41.9028, 12.4964, "Kryeqyteti: Roma. Histori e lashtë."],
-    ["Letonia", 56.9496, 24.1052, "Kryeqyteti: Riga. Qytet baltik."],
-    ["Lituania", 54.6872, 25.2797, "Kryeqyteti: Vilnius. Vend baltik."],
-    ["Luksemburgu", 49.6116, 6.1319, "Kryeqyteti: Luksemburgu. Shtet i vogël."],
-    ["Malta", 35.8989, 14.5146, "Kryeqyteti: Valletta. Ishull mesdhetar."],
-    ["Holanda", 52.3676, 4.9041, "Kryeqyteti: Amsterdami. Kanale të famshme."],
-    ["Polonia", 52.2297, 21.0122, "Kryeqyteti: Varshava. Vend i madh i BE."],
-    ["Portugalia", 38.7223, -9.1393, "Kryeqyteti: Lisbona. Në Atlantik."],
-    ["Rumania", 44.4268, 26.1025, "Kryeqyteti: Bukureshti. Karpate."],
-    ["Sllovakia", 48.1486, 17.1077, "Kryeqyteti: Bratislava. Pranë Danubit."],
-    ["Sllovenia", 46.0569, 14.5058, "Kryeqyteti: Lubjana. Natyrë e gjelbër."],
-    ["Spanja", 40.4168, -3.7038, "Kryeqyteti: Madridi. Vend turistik."],
-    ["Suedia", 59.3293, 18.0686, "Kryeqyteti: Stokholmi. Vend nordik."]
-  ];
+/ PAGE /
+function page(c){
+return <h2>${c.flag} ${c.name}</h2>  <img src="${c.img}" width="100%" style="border-radius:12px">  <div class="tabs"> <button class="active" onclick="showTab('info')">Info</button> <button onclick="showTab('eco')">Ekonomi</button> <button onclick="showTab('cul')">Kulturë</button> </div>  <div id="info" class="tab"> <div class="card">Kryeqyteti: ${c.capital}</div> <div class="card">Popullsia: ${c.population}</div> </div>  <div id="eco" class="tab" style="display:none"> <div class="card">${c.economy}</div> </div>  <div id="cul" class="tab" style="display:none"> <div class="card">${c.culture}</div> </div>;
+}
 
-  countries.forEach(c => {
-    L.marker([c[1], c[2]])
-      .addTo(map)
-      .bindPopup(
-        "<b>" + c[0] + "</b><br>" + c[3]
-      );
-  });
+/ DATA /
+var countries = [
+{name:"Austria",lat:48.2082,lng:16.3738,flag:"🇦🇹",img:"https://flagcdn.com/w320/at.png",capital:"Vjenë",population:"9.1M",economy:"Ekonomi e zhvilluar, turizëm alpin, industri shërbimesh.",culture:"Muzikë klasike, opera, trashëgimi perandorake."},
+{name:"Belgjika",lat:50.8503,lng:4.3517,flag:"🇧🇪",img:"https://flagcdn.com/w320/be.png",capital:"Bruksel",population:"11.7M",economy:"Qendër e institucioneve të BE, shërbime dhe industri.",culture:"Çokollatë, birrë, komikë (Tintin)."},
+{name:"Bullgaria",lat:42.6977,lng:23.3219,flag:"🇧🇬",img:"https://flagcdn.com/w320/bg.png",capital:"Sofje",population:"6.4M",economy:"Në zhvillim, IT dhe industri të lehta.",culture:"Folklor ballkanik, histori e lashtë."},
+{name:"Kroacia",lat:45.8150,lng:15.9819,flag:"🇭🇷",img:"https://flagcdn.com/w320/hr.png",capital:"Zagreb",population:"3.9M",economy:"Turizëm bregdetar, shërbime.",culture:"Adriatiku, qytete historike."},
+{name:"Qipro",lat:35.1856,lng:33.3823,flag:"🇨🇾",img:"https://flagcdn.com/w320/cy.png",capital:"Nikozia",population:"1.2M",economy:"Turizëm, shërbime financiare.",culture:"Ndikim grek/turk, mesdhetar."},
+{name:"Çekia",lat:50.0755,lng:14.4378,flag:"🇨🇿",img:"https://flagcdn.com/w320/cz.png",capital:"Pragë",population:"10.7M",economy:"Industri dhe eksport, automjete.",culture:"Arkitekturë gotike, birrë e famshme."},
+{name:"Danimarka",lat:55.6761,lng:12.5683,flag:"🇩🇰",img:"https://flagcdn.com/w320/dk.png",capital:"Kopenhagen",population:"5.9M",economy:"Inovacion, energji e gjelbër.",culture:"Dizajn nordik, cilësi jete e lartë."},
+{name:"Estonia",lat:59.4370,lng:24.7536,flag:"🇪🇪",img:"https://flagcdn.com/w320/ee.png",capital:"Talinn",population:"1.3M",economy:"Shtet digjital, IT.",culture:"Mesjetë + teknologji moderne."},
+{name:"Finlanda",lat:60.1699,lng:24.9384,flag:"🇫🇮",img:"https://flagcdn.com/w320/fi.png",capital:"Helsinki",population:"5.6M",economy:"Arsim i fortë, industri teknologjike.",culture:"Sauna, natyrë, dizajn."},
+{name:"Franca",lat:48.8566,lng:2.3522,flag:"🇫🇷",img:"https://flagcdn.com/w320/fr.png",capital:"Paris",population:"68M",economy:"Një nga më të mëdhatë globalisht.",culture:"Art, modë, kuzhinë."},
+{name:"Gjermania",lat:52.52,lng:13.405,flag:"🇩🇪",img:"https://flagcdn.com/w320/de.png",capital:"Berlin",population:"84M",economy:"Më e forta në BE, industri e avancuar.",culture:"Inxhinieri, muzikë, festivale."},
+{name:"Greqia",lat:37.9838,lng:23.7275,flag:"🇬🇷",img:"https://flagcdn.com/w320/gr.png",capital:"Athinë",population:"10.4M",economy:"Turizëm, detari.",culture:"Antikitet, filozofi."},
+{name:"Hungaria",lat:47.4979,lng:19.0402,flag:"🇭🇺",img:"https://flagcdn.com/w320/hu.png",capital:"Budapest",population:"9.6M",economy:"Prodhim, shërbime.",culture:"Banjo termale, arkitekturë."},
+{name:"Irlanda",lat:53.3498,lng:-6.2603,flag:"🇮🇪",img:"https://flagcdn.com/w320/ie.png",capital:"Dublin",population:"5.2M",economy:"Tech hub (multinacionale).",culture:"Keltike, muzikë, pub-e."},
+{name:"Italia",lat:41.9028,lng:12.4964,flag:"🇮🇹",img:"https://flagcdn.com/w320/it.png",capital:"Romë",population:"59M",economy:"Turizëm, modë, industri.",culture:"Art, histori romake, kuzhinë."},
+{name:"Letonia",lat:56.9496,lng:24.1052,flag:"🇱🇻",img:"https://flagcdn.com/w320/lv.png",capital:"Riga",population:"1.9M",economy:"Shërbime, IT.",culture:"Baltike, arkitekturë art nouveau."},
+{name:"Lituania",lat:54.6872,lng:25.2797,flag:"🇱🇹",img:"https://flagcdn.com/w320/lt.png",capital:"Vilnius",population:"2.8M",economy:"Në rritje, prodhim.",culture:"Historike, e gjelbër."},
+{name:"Luksemburgu",lat:49.6116,lng:6.1319,flag:"🇱🇺",img:"https://flagcdn.com/w320/lu.png",capital:"Luksemburg",population:"0.65M",economy:"Financa, shumë i pasur.",culture:"Multilinguizëm."},
+{name:"Malta",lat:35.8989,lng:14.5146,flag:"🇲🇹",img:"https://flagcdn.com/w320/mt.png",capital:"Valletta",population:"0.5M",economy:"Turizëm, shërbime.",culture:"Mesdhetare, histori kalorësish."},
+{name:"Holanda",lat:52.3676,lng:4.9041,flag:"🇳🇱",img:"https://flagcdn.com/w320/nl.png",capital:"Amsterdam",population:"17.9M",economy:"Tregti, logjistikë.",culture:"Kanale, biçikleta."},
+{name:"Polonia",lat:52.2297,lng:21.0122,flag:"🇵🇱",img:"https://flagcdn.com/w320/pl.png",capital:"Varshavë",population:"38M",economy:"Në rritje të shpejtë.",culture:"Tradita, histori e fortë."},
+{name:"Portugalia",lat:38.7223,lng:-9.1393,flag:"🇵🇹",img:"https://flagcdn.com/w320/pt.png",capital:"Lisbonë",population:"10.3M",economy:"Turizëm, shërbime.",culture:"Fado, detari."},
+{name:"Rumania",lat:44.4268,lng:26.1025,flag:"🇷🇴",img:"https://flagcdn.com/w320/ro.png",capital:"Bukuresht",population:"19M",economy:"IT, prodhim.",culture:"Karpate, folklor."},
+{name:"Sllovakia",lat:48.1486,lng:17.1077,flag:"🇸🇰",img:"https://flagcdn.com/w320/sk.png",capital:"Bratislavë",population:"5.4M",economy:"Automotive, industri.",culture:"Qendra historike."},
+{name:"Sllovenia",lat:46.0569,lng:14.5058,flag:"🇸🇮",img:"https://flagcdn.com/w320/si.png",capital:"Lubjanë",population:"2.1M",economy:"E qëndrueshme, turizëm.",culture:"Alpe + Adriatik."},
+{name:"Spanja",lat:40.4168,lng:-3.7038,flag:"🇪🇸",img:"https://flagcdn.com/w320/es.png",capital:"Madrid",population:"48M",economy:"Turizëm, shërbime.",culture:"Flamenco, sport."},
+{name:"Suedia",lat:59.3293,lng:18.0686,flag:"🇸🇪",img:"https://flagcdn.com/w320/se.png",capital:"Stokholm",population:"10.5M",economy:"Inovacion, teknologji.",culture:"Dizajn nordik, mirëqenie."}
+];
+
+/ SHOW PANEL /
+function page(c){
+return `
+<h2 style="margin:5px 0">${c.flag} ${c.name}</h2>
+
+<img src="${c.img}" width="100%" style="border-radius:12px">
+
+<div class="tabs">
+<button class="active" onclick="showTab('info')">Përmbledhje</button>
+<button onclick="showTab('eco')">Ekonomia</button>
+<button onclick="showTab('cul')">Kultura</button>
+</div>
+
+<div id="info" class="tab">
+<div class="card"><b>Kryeqyteti:</b> ${c.capital}</div>
+<div class="card"><b>Popullsia:</b> ${c.population}</div>
+<div class="card">Shtet anëtar i BE me rol të rëndësishëm në rajon.</div>
+</div>
+
+<div id="eco" class="tab" style="display:none">
+<div class="card">${c.economy}</div>
+</div>
+
+<div id="cul" class="tab" style="display:none">
+<div class="card">${c.culture}</div>
+</div>
+`;
+}
+
+/ MARKERS /
+countries.forEach(c=>{
+L.marker([c.lat,c.lng]).addTo(map)
+.on('click',()=>openPanel(c));
+});
+
+/ SEARCH */
+document.getElementById("search").oninput=function(){
+let v=this.value.toLowerCase();
+let found=countries.find(c=>c.name.toLowerCase().includes(v));
+if(found) openPanel(found);
+};
 </script>
 
 </body>
-</html>
+</
