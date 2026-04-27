@@ -87,7 +87,15 @@ Atraksionet kryesore përfshijnë Alpet Austriake, Pallatin Schönbrunn dhe Kate
 <b>🇪🇺 Marrëdhëniet ndërkombëtare:</b><br>\
 Austria është anëtare e Bashkimit Europian që nga viti 1995 dhe njihet për neutralitetin e saj politik."
 ]
+countries.forEach(function(country) {
+    var marker = L.marker([country[1], country[2]]).addTo(map);
 
+    marker.bindPopup(country[3]);
+
+    marker.on('click', function() {
+        document.getElementById("panel").innerHTML = country[3];
+    });
+});
 ["Belgjika",50.8503,4.3517,
 "🇧🇪 Belgjika<br>Kryeqyteti: Brukseli<br>Selia e BE-së, e famshme për çokollatë, birrë dhe administratë europiane."],
 
@@ -167,11 +175,14 @@ Austria është anëtare e Bashkimit Europian që nga viti 1995 dhe njihet për 
 "🇸🇪 Suedia<br>Kryeqyteti: Stokholm<br>Teknologji, dizajn dhe standard i lartë jetese."]
 ];
 
+countries.forEach(function(country) {
+    var marker = L.marker([country[1], country[2]]).addTo(map);
 
-countries.forEach (c=>{
-L. marker ([c.lat, c.lng]) .addTo (map)
-• on ('click', ()=>openPanel(c));
-}) ;
+    marker.bindPopup(country[3]);
+
+    marker.on('click', function() {
+        document.getElementById("panel").innerHTML = country[3];
+    });
 });
 
 </script>
