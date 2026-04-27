@@ -1,77 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="sq">
 <head>
-<meta charset="utf-8">
-<title>BE Guide</title>
+<meta charset="utf-8" />
+<title>BE - Harta Interaktive</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
-body { margin:0; font-family: Arial; }
-
-h1{
-  background:#1e3a5f;
-  color:white;
-  padding:15px;
-  margin:0;
-  text-align:center;
-}
-
-#map{ height:60vh; }
-
-#panel{
-  padding:20px;
-  background:#f5f5f5;
-}
-
-.card{
-  background:white;
-  padding:15px;
-  margin-top:10px;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
+body { margin:0; display:flex; font-family:Arial; }
+#map { height:100vh; width:70%; }
+#panel { width:30%; padding:20px; background:#f4f4f4; overflow:auto; }
 </style>
 </head>
 
 <body>
 
-<h1>Bashkimi Europian - 27 Shtetet</h1>
-
 <div id="map"></div>
-
-<div id="panel">
-  <h2>Kliko një shtet</h2>
-</div>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<div id="panel">Kliko mbi një shtet</div>
 
 <script>
-
-var map = L.map('map').setView([50,10],4);
+var map = L.map('map').setView([54, 15], 4);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var countries = [
-["Austria", 48.2082, 16.3738,
-"🇦🇹 Austria<br>Kryeqyteti: Vjena<br>Popullsia: ~9 milion<br>Gjuha: Gjermanisht<br>Monedha: Euro<br>Vend alpin me ekonomi të zhvilluar"]
 
-countries.forEach(function(country) {
-    var marker = L.marker([country[1], country[2]]).addTo(map);
+["Austria",48.2082,16.3738,"🇦🇹 Austria<br><br><b>Kryeqyteti:</b> Vjena<br><b>Popullsia:</b> ~9 milion<br><b>Gjuha:</b> Gjermanisht<br><b>Monedha:</b> Euro<br><br>Vend alpin shumë i zhvilluar me ekonomi të fortë dhe turizëm të zhvilluar."],
 
-    marker.bindPopup(country[3]);
+["Germany",52.5200,13.4050,"🇩🇪 Gjermania<br><br><b>Kryeqyteti:</b> Berlini<br><b>Popullsia:</b> ~83 milion<br><b>Gjuha:</b> Gjermanisht<br><b>Monedha:</b> Euro<br><br>Ekonomia më e madhe në Evropë dhe fuqi industriale."] ,
 
-    marker.on('click', function() {
-        document.getElementById("panel").innerHTML = country[3];
-    });
+["France",48.8566,2.3522,"🇫🇷 Franca<br><br><b>Kryeqyteti:</b> Parisi<br><b>Popullsia:</b> ~67 milion<br><b>Gjuha:</b> Frëngjisht<br><b>Monedha:</b> Euro<br><br>Një nga vendet më të rëndësishme në BE për kulturë dhe ekonomi."] ,
+
+["Italy",41.9028,12.4964,"🇮🇹 Italia<br><br><b>Kryeqyteti:</b> Roma<br><b>Popullsia:</b> ~59 milion<br><b>Gjuha:</b> Italisht<br><b>Monedha:</b> Euro<br><br>E njohur për historinë, artin dhe turizmin."] ,
+
+["Spain",40.4168,-3.7038,"🇪🇸 Spanja<br><br><b>Kryeqyteti:</b> Madridi<br><b>Popullsia:</b> ~47 milion<br><b>Gjuha:</b> Spanjisht<br><b>Monedha:</b> Euro<br><br>Një nga destinacionet turistike më të mëdha në botë."] ,
+
+["Belgium",50.8503,4.3517,"🇧🇪 Belgjika<br><br><b>Kryeqyteti:</b> Brukseli<br><b>Popullsia:</b> ~11 milion<br><b>Monedha:</b> Euro<br><br>Qendra politike e Bashkimit Europian."] ,
+
+["Netherlands",52.3676,4.9041,"🇳🇱 Holanda<br><br><b>Kryeqyteti:</b> Amsterdami<br><b>Popullsia:</b> ~17 milion<br><b>Monedha:</b> Euro<br><br>Vend shumë i zhvilluar dhe inovativ."] ,
+
+["Poland",52.2297,21.0122,"🇵🇱 Polonia<br><br><b>Kryeqyteti:</b> Varshava<br><b>Popullsia:</b> ~38 milion<br><b>Monedha:</b> Zloty<br><br>Ekonomi në rritje në Evropën Lindore."] ,
+
+["Sweden",59.3293,18.0686,"🇸🇪 Suedia<br><br><b>Kryeqyteti:</b> Stokholmi<br><b>Popullsia:</b> ~10 milion<br><b>Monedha:</b> Krona<br><br>Nivel shumë i lartë jetese."] ,
+
+["Denmark",55.6761,12.5683,"🇩🇰 Danimarka<br><br><b>Kryeqyteti:</b> Kopenhaga<br><b>Popullsia:</b> ~6 milion<br><b>Monedha:</b> Krona<br><br>Një nga vendet më të lumtura në botë."] ,
+
+["Finland",60.1699,24.9384,"🇫🇮 Finlanda<br><br><b>Kryeqyteti:</b> Helsinki<br><b>Popullsia:</b> ~5.5 milion<br><b>Monedha:</b> Euro<br><br>Sistem arsimor shumë i fortë."] ,
+
+["Greece",37.9838,23.7275,"🇬🇷 Greqia<br><br><b>Kryeqyteti:</b> Athina<br><b>Popullsia:</b> ~10 milion<br><b>Monedha:</b> Euro<br><br>Djepi i qytetërimit perëndimor."] ,
+
+["Portugal",38.7223,-9.1393,"🇵🇹 Portugalia<br><br><b>Kryeqyteti:</b> Lisbona<br><b>Popullsia:</b> ~10 milion<br><b>Monedha:</b> Euro<br><br>Vend bregdetar me turizëm të zhvilluar."] ,
+
+["Ireland",53.3498,-6.2603,"🇮🇪 Irlanda<br><br><b>Kryeqyteti:</b> Dublini<br><b>Popullsia:</b> ~5 milion<br><b>Monedha:</b> Euro<br><br>Qendër e rëndësishme teknologjike."] ,
+
+["Hungary",47.4979,19.0402,"🇭🇺 Hungaria<br><br><b>Kryeqyteti:</b> Budapesti<br><b>Popullsia:</b> ~9 milion<br><b>Monedha:</b> Forint<br><br>Vend me histori të pasur."] ,
+
+["Czechia",50.0755,14.4378,"🇨🇿 Çekia<br><br><b>Kryeqyteti:</b> Praga<br><b>Popullsia:</b> ~10 milion<br><b>Monedha:</b> Koruna<br><br>Ekonomi industriale."] ,
+
+["Slovakia",48.1486,17.1077,"🇸🇰 Sllovakia<br><br><b>Kryeqyteti:</b> Bratislava<br><b>Popullsia:</b> ~5 milion<br><b>Monedha:</b> Euro<br><br>Ekonomi në rritje."] ,
+
+["Slovenia",46.0569,14.5058,"🇸🇮 Sllovenia<br><br><b>Kryeqyteti:</b> Lubjana<br><b>Popullsia:</b> ~2 milion<br><b>Monedha:</b> Euro<br><br>Vend i zhvilluar dhe i gjelbër."] ,
+
+["Croatia",45.8150,15.9819,"🇭🇷 Kroacia<br><br><b>Kryeqyteti:</b> Zagrebi<br><b>Popullsia:</b> ~4 milion<br><b>Monedha:</b> Euro<br><br>I njohur për bregdetin turistik."] ,
+
+["Romania",44.4268,26.1025,"🇷🇴 Rumania<br><br><b>Kryeqyteti:</b> Bukureshti<br><b>Popullsia:</b> ~19 milion<br><b>Monedha:</b> Leu<br><br>Ekonomi në zhvillim."] ,
+
+["Bulgaria",42.6977,23.3219,"🇧🇬 Bullgaria<br><br><b>Kryeqyteti:</b> Sofja<br><b>Popullsia:</b> ~6 milion<br><b>Monedha:</b> Lev<br><br>Vend në Evropën Lindore."] ,
+
+["Estonia",59.4370,24.7536,"🇪🇪 Estonia<br><br><b>Kryeqyteti:</b> Talini<br><b>Popullsia:</b> ~1 milion<br><b>Monedha:</b> Euro<br><br>Vend shumë digjital."] ,
+
+["Latvia",56.9496,24.1052,"🇱🇻 Letonia<br><br><b>Kryeqyteti:</b> Riga<br><b>Popullsia:</b> ~2 milion<br><b>Monedha:</b> Euro<br><br>Vend baltik."] ,
+
+["Lithuania",54.6872,25.2797,"🇱🇹 Lituania<br><br><b>Kryeqyteti:</b> Vilnius<br><b>Popullsia:</b> ~2.8 milion<br><b>Monedha:</b> Euro<br><br>Ekonomi në rritje."] ,
+
+["Luxembourg",49.6116,6.1319,"🇱🇺 Luksemburgu<br><br><b>Kryeqyteti:</b> Luksemburg<br><b>Popullsia:</b> ~650 mijë<br><b>Monedha:</b> Euro<br><br>Qendër financiare."] ,
+
+["Malta",35.8989,14.5146,"🇲🇹 Malta<br><br><b>Kryeqyteti:</b> Valletta<br><b>Popullsia:</b> ~500 mijë<br><b>Monedha:</b> Euro<br><br>Ishull turistik."] ,
+
+["Cyprus",35.1856,33.3823,"🇨🇾 Qipro<br><br><b>Kryeqyteti:</b> Nikosia<br><b>Popullsia:</b> ~1 milion<br><b>Monedha:</b> Euro<br><br>Ishull në Mesdhe."]
+];
+
+// MARKERS
+countries.forEach(function(c){
+  var marker = L.marker([c[1], c[2]]).addTo(map);
+  marker.bindPopup(c[3]);
+  marker.on('click', function(){
+    document.getElementById("panel").innerHTML = c[3];
+  });
 });
-
 </script>
 
 </body>
