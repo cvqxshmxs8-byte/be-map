@@ -142,11 +142,16 @@ var countries = [
 "🇸🇪 Suedia<br>Kryeqyteti: Stokholm<br>Teknologji, dizajn dhe standard i lartë jetese."]
 ];
 
-countries.forEach(c=>{
-  L.marker([c[1],c[2]]).addTo(map)
-  .on('click', function(){
-    document.getElementById("panel").innerHTML = c[3];
-  });
+
+countries.forEach(function(country) {
+    var marker = L.marker([country[1], country[2]]).addTo(map);
+    
+    marker.bindPopup("<b>" + country[0] + "</b><br>" + country[3]);
+    
+    marker.on('click', function() {
+        document.getElementById("panel").innerHTML =
+            "<h2>" + country[0] + "</h2><p>" + country[3] + "</p>";
+    });
 });
 
 </script>
