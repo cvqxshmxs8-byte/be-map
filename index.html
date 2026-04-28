@@ -28,12 +28,13 @@ header { padding:15px; text-align:center; font-size:24px; font-weight:bold; back
 <div id="panel">
 <div class="card">
 <h2>Kliko një shtet</h2>
-<p>Paneli do mbushet me informacion të plotë.</p>
+<p>Informacioni shfaqet këtu.</p>
 </div>
 </div>
 </div>
 
 <script>
+
 var map = L.map('map').setView([54,15],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
@@ -52,139 +53,139 @@ return f+" <h2>"+n+"</h2>"
 var countries = [
 
 ["Austria",48.2,16.37,info("Austria","🇦🇹","1995","Vjena","~9M","Gjermanisht","Euro",
-"Vend alpin me male dhe natyrë të bukur.",
-"Ekonomi e zhvilluar dhe turizëm i fortë.",
-"Muzikë klasike dhe tradita europiane.")],
-
-["Germany",52.52,13.405,info("Gjermania","🇩🇪","1958","Berlini","~83M","Gjermanisht","Euro",
-"Vend në Evropën Qendrore me lumenj të mëdhenj.",
-"Industria më e fortë në Evropë.",
-"Kulturë teknologjike dhe historike.")],
-
-["France",48.85,2.35,info("Franca","🇫🇷","1958","Parisi","~67M","Frëngjisht","Euro",
-"Vend i madh me rajone të ndryshme.",
-"Turizëm dhe bujqësi të zhvilluar.",
-"Modë, art dhe kuzhinë.")],
-
-["Italy",41.9,12.49,info("Italia","🇮🇹","1958","Roma","~59M","Italisht","Euro",
-"Gadishull mesdhetar me klimë të ngrohtë.",
-"Ekonomi në industri dhe turizëm.",
-"Histori romake dhe art.")],
-
-["Spain",40.41,-3.7,info("Spanja","🇪🇸","1986","Madridi","~47M","Spanjisht","Euro",
-"Vend në jugperëndim.",
-"Turizëm shumë i fortë.",
-"Flamenco dhe festa.")],
+"Austria ndodhet në zemër të Evropës dhe dominohet nga Alpet. Terreni është kryesisht malor me lugina të gjera dhe lumenj si Danubi që kalon përmes vendit.<br><br>Klima varion nga alpine në veri në më të butë në jug, duke krijuar kushte ideale për turizëm.",
+"Ekonomia është shumë e zhvilluar dhe bazohet në industri, shërbime dhe turizëm. Sektori bankar dhe eksportet luajnë rol të madh në stabilitetin ekonomik.<br><br>Turizmi malor dhe kulturor është një nga burimet kryesore të të ardhurave.",
+"Kultura austriake është e lidhur ngushtë me muzikën klasike dhe artin evropian. Vjena është një nga qendrat më të rëndësishme kulturore në botë.<br><br>Traditat dhe festivalet muzikore janë pjesë e identitetit kombëtar.")],
 
 ["Belgium",50.85,4.35,info("Belgjika","🇧🇪","1958","Brukseli","~11M","Frëngjisht/Holandisht","Euro",
-"Vend i vogël në Evropë.",
-"Qendër politike e BE.",
-"Kulturë shumëgjuhëshe.")],
-
-["Netherlands",52.36,4.9,info("Holanda","🇳🇱","1958","Amsterdami","~17M","Holandisht","Euro",
-"Vend i sheshtë me kanale.",
-"Ekonomi inovative.",
-"Kulturë liberale.")],
-
-["Luxembourg",49.61,6.13,info("Luksemburgu","🇱🇺","1958","Luksemburg","~0.6M","3 gjuhë","Euro",
-"Vend shumë i vogël.",
-"Qendër financiare.",
-"Standard jetese shumë i lartë.")],
-
-["Denmark",55.67,12.56,info("Danimarka","🇩🇰","1973","Kopenhaga","~6M","Daneze","Krone",
-"Vend nordik me ishuj.",
-"Ekonomi shumë e zhvilluar.",
-"Njerëz shumë të lumtur.")],
-
-["Ireland",53.34,-6.26,info("Irlanda","🇮🇪","1973","Dublini","~5M","Anglisht","Euro",
-"Ishull në Atlantik.",
-"Teknologji dhe kompani të mëdha.",
-"Kulturë tradicionale.")],
-
-["Greece",37.98,23.72,info("Greqia","🇬🇷","1981","Athina","~10M","Greqisht","Euro",
-"Vend mesdhetar.",
-"Turizëm i fortë.",
-"Histori antike.")],
-
-["Portugal",38.72,-9.13,info("Portugalia","🇵🇹","1986","Lisbona","~10M","Portugalisht","Euro",
-"Bregdet i gjatë.",
-"Ekonomi në rritje.",
-"Kulturë detare.")],
-
-["Sweden",59.32,18.06,info("Suedia","🇸🇪","1995","Stokholmi","~10M","Suedisht","Krona",
-"Vend nordik.",
-"Ekonomi shumë e fortë.",
-"Jetesë e lartë.")],
-
-["Finland",60.16,24.93,info("Finlanda","🇫🇮","1995","Helsinki","~5.5M","Finlandisht","Euro",
-"Shumë liqene dhe pyje.",
-"Arsim shumë i mirë.",
-"Kulturë e qetë.")],
-
-["Poland",52.22,21.01,info("Polonia","🇵🇱","2004","Varshava","~38M","Polonisht","Zloty",
-"Vend i madh në lindje.",
-"Ekonomi në rritje.",
-"Kulturë tradicionale.")],
-
-["Czechia",50.07,14.43,info("Çekia","🇨🇿","2004","Praga","~10M","Çekisht","Koruna",
-"Vend në Evropën Qendrore.",
-"Industri e fortë.",
-"Arkitekturë historike.")],
-
-["Hungary",47.49,19.04,info("Hungaria","🇭🇺","2004","Budapesti","~9M","Hungarisht","Forint",
-"Vend pa dalje në det.",
-"Ekonomi në zhvillim.",
-"Banja termale.")],
-
-["Slovakia",48.14,17.1,info("Sllovakia","🇸🇰","2004","Bratislava","~5M","Sllovakisht","Euro",
-"Vend malor.",
-"Industri automobilistike.",
-"Kulturë tradicionale.")],
-
-["Slovenia",46.05,14.5,info("Sllovenia","🇸🇮","2004","Lubjana","~2M","Sllovenisht","Euro",
-"Vend i gjelbër.",
-"Ekonomi e qëndrueshme.",
-"Natyra e bukur.")],
-
-["Estonia",59.43,24.75,info("Estonia","🇪🇪","2004","Talini","~1M","Estonisht","Euro",
-"Vend baltik.",
-"Shumë digjital.",
-"Kulturë moderne.")],
-
-["Latvia",56.94,24.1,info("Letonia","🇱🇻","2004","Riga","~2M","Letonisht","Euro",
-"Vend baltik.",
-"Ekonomi në zhvillim.",
-"Kulturë tradicionale.")],
-
-["Lithuania",54.68,25.27,info("Lituania","🇱🇹","2004","Vilnius","~2.8M","Lituanisht","Euro",
-"Vend baltik.",
-"Ekonomi në rritje.",
-"Kulturë historike.")],
-
-["Malta",35.89,14.51,info("Malta","🇲🇹","2004","Valletta","~0.5M","Malteze","Euro",
-"Ishull i vogël.",
-"Turizëm shumë i fortë.",
-"Kulturë mesdhetare.")],
-
-["Cyprus",35.18,33.38,info("Qipro","🇨🇾","2004","Nikosia","~1M","Greqisht","Euro",
-"Ishull mesdhetar.",
-"Ekonomi turistike.",
-"Kulturë greke.")],
-
-["Romania",44.42,26.1,info("Rumania","🇷🇴","2007","Bukureshti","~19M","Rumanisht","Leu",
-"Vend i madh lindor.",
-"Ekonomi në zhvillim.",
-"Kulturë folklorike.")],
+"Belgjika ka terren të sheshtë dhe klimë oqeanike. Pozicioni i saj në Evropën Perëndimore e bën shumë strategjike.<br><br>Ka rrjet të zhvilluar lumenjsh dhe qytetesh.",
+"Ekonomia është e fortë në shërbime, industri dhe tregti ndërkombëtare. Brukseli është qendra politike e BE-së.<br><br>Financat dhe administrata janë sektorë kryesorë.",
+"Kultura është shumëgjuhëshe dhe e pasur. Belgjika është e njohur për artin dhe çokollatën.<br><br>Qytetet mesjetare janë shumë turistike.")],
 
 ["Bulgaria",42.69,23.32,info("Bullgaria","🇧🇬","2007","Sofja","~6M","Bullgarisht","Lev",
-"Vend ballkanik.",
-"Ekonomi në rritje.",
-"Kulturë e pasur.")],
+"Bullgaria ka male, fusha dhe dalje në Detin e Zi. Klima është kontinentale dhe mesdhetare.<br><br>Territori është i pasur me natyrë dhe burime.",
+"Ekonomia bazohet në industri, bujqësi dhe teknologji. Turizmi bregdetar është shumë i zhvilluar.<br><br>Sektori IT po rritet shpejt.",
+"Kultura është tradicionale dhe ortodokse. Ka shumë festa folklorike.<br><br>Historia dhe muzika popullore janë shumë të forta.")],
 
 ["Croatia",45.81,15.98,info("Kroacia","🇭🇷","2013","Zagrebi","~4M","Kroatisht","Euro",
-"Bregdet Adriatik.",
-"Turizëm shumë i zhvilluar.",
-"Kulturë mesdhetare.")]
+"Kroacia ka bregdet të gjatë në Adriatik dhe ishuj të shumtë. Terreni është malor dhe bregdetar.<br><br>Klima është mesdhetare e butë.",
+"Ekonomia bazohet në turizëm dhe shërbime. Bregdeti është burimi kryesor ekonomik.<br><br>Industria është në zhvillim.",
+"Kultura është mesdhetare dhe historike. Qytetet e vjetra janë shumë të vizituara.<br><br>Traditat janë të ruajtura mirë.")],
+
+["Cyprus",35.18,33.38,info("Qipro","🇨🇾","2004","Nikosia","~1M","Greqisht","Euro",
+"Qipro është ishull mesdhetar me klimë të ngrohtë. Ka male dhe bregdet të bukur.<br><br>Ka pozicion strategjik në Mesdhe.",
+"Ekonomia bazohet në turizëm dhe shërbime financiare. Sektori bankar është shumë i zhvilluar.<br><br>Turizmi është burim kryesor.",
+"Kultura është përzierje greke dhe turke. Ka histori të lashtë.<br><br>Traditat mesdhetare janë shumë të forta.")],
+
+["Czechia",50.07,14.43,info("Çekia","🇨🇿","2004","Praga","~10M","Çekisht","Koruna",
+"Çekia ka terren kodrinor dhe shumë qytete historike. Klima është kontinentale.<br><br>Është vend pa dalje në det.",
+"Ekonomia është industriale dhe shumë e zhvilluar. Automobilizmi është sektor kyç.<br><br>Eksportet janë shumë të forta.",
+"Kultura është e pasur me arkitekturë dhe art. Praga është një nga qytetet më të bukura.<br><br>Traditat janë shumë të ruajtura.")],
+
+["Denmark",55.67,12.56,info("Danimarka","🇩🇰","1973","Kopenhaga","~6M","Daneze","Krone",
+"Danimarka është vend nordik me ishuj dhe gadishuj. Terreni është shumë i sheshtë.<br><br>Klima është e freskët dhe me erë.",
+"Ekonomia është shumë e zhvilluar në teknologji dhe energji. Transporti detar është shumë i rëndësishëm.<br><br>Standardi i jetesës është shumë i lartë.",
+"Kultura fokusohet në thjeshtësi dhe mirëqenie. Kopenhaga është qytet modern.<br><br>Traditat nordike janë shumë të forta.")],
+
+["Estonia",59.43,24.75,info("Estonia","🇪🇪","2004","Talini","~1M","Estonisht","Euro",
+"Estonia ka pyje dhe bregdet në Detin Baltik. Terreni është i sheshtë.<br><br>Klima është e ftohtë dhe e lagësht.",
+"Ekonomia është shumë digjitale dhe moderne. Teknologjia është sektor kryesor.<br><br>Start-up-et janë shumë të zhvilluara.",
+"Kultura është moderne dhe nordike. Ka ndikime skandinave.<br><br>Traditat janë të ruajtura.")],
+
+["Finland",60.16,24.93,info("Finlanda","🇫🇮","1995","Helsinki","~5.5M","Finlandisht","Euro",
+"Finlanda ka shumë liqene dhe pyje. Klima është shumë e ftohtë në dimër.<br><br>Territori është pak i populluar.",
+"Ekonomia është e fortë në teknologji dhe arsim. Industria e pylltarisë është e rëndësishme.<br><br>Inovacioni është shumë i zhvilluar.",
+"Kultura është e qetë dhe natyrore. Sauna është pjesë e jetës.<br><br>Dizajni finlandez është shumë i njohur.")],
+
+["France",48.85,2.35,info("Franca","🇫🇷","1958","Parisi","~67M","Frëngjisht","Euro",
+"Franca ka male, fusha dhe bregdet të ndryshëm. Klima ndryshon sipas rajoneve.<br><br>Lumenjtë janë shumë të rëndësishëm.",
+"Ekonomia është shumë e fortë në industri dhe turizëm. Është fuqi globale ekonomike.<br><br>Eksportet janë shumë të mëdha.",
+"Kultura është art, modë dhe gastronomi. Parisi është qendër botërore.<br><br>Muzetë dhe moda janë shumë të njohura.")],
+
+["Germany",52.52,13.405,info("Gjermania","🇩🇪","1958","Berlini","~83M","Gjermanisht","Euro",
+"Gjermania ka fusha, male dhe lumenj të mëdhenj si Rhine. Klima është e butë me katër stinë.<br><br>Është qendër gjeografike e Evropës.",
+"Ekonomia është më e madhja në Evropë. Industria automobilistike dhe teknologjike janë shumë të forta.<br><br>Eksportet janë kryesore për GDP.",
+"Kultura përfshin filozofi, muzikë dhe histori të pasur. Berlini është qendër moderne.<br><br>Festat si Oktoberfest janë të njohura.")],
+
+["Greece",37.98,23.72,info("Greqia","🇬🇷","1981","Athina","~10M","Greqisht","Euro",
+"Greqia ka mijëra ishuj dhe terren malor. Klima është mesdhetare e ngrohtë.<br><br>Ka dalje të madhe detare.",
+"Ekonomia bazohet në turizëm dhe transport detar. Turizmi është sektor kryesor.<br><br>Detaria është shumë e rëndësishme.",
+"Kultura është themeli i qytetërimit evropian. Ka histori të lashtë.<br><br>Mitologjia greke është shumë e njohur.")],
+
+["Hungary",47.49,19.04,info("Hungaria","🇭🇺","2004","Budapesti","~9M","Hungarisht","Forint",
+"Hungaria ka fusha të gjera dhe lumin Danub. Terreni është kryesisht i sheshtë.<br><br>Klima është kontinentale.",
+"Ekonomia përfshin industri dhe turizëm. Automobilizmi është shumë i rëndësishëm.<br><br>Investimet po rriten.",
+"Kultura ka muzikë dhe tradita të forta. Banjat termale janë shumë të njohura.<br><br>Budapesti është qendër kulturore.")],
+
+["Ireland",53.34,-6.26,info("Irlanda","🇮🇪","1973","Dublini","~5M","Anglisht","Euro",
+"Irlanda është ishull me peizazhe të gjelbra. Klima është oqeanike me reshje.<br><br>Ka fusha dhe male të ulëta.",
+"Ekonomia është e fortë në teknologji dhe shërbime. Shumë kompani globale janë këtu.<br><br>Eksportet teknologjike janë të larta.",
+"Kultura është muzikore dhe tradicionale. Pijetoret dhe folklori janë të njohura.<br><br>Festat janë shumë të gjalla.")],
+
+["Italy",41.9,12.49,info("Italia","🇮🇹","1958","Roma","~59M","Italisht","Euro",
+"Italia është gadishull mesdhetar me male dhe bregdet. Alpet dhe vullkanet janë karakteristike.<br><br>Klima është mesdhetare.",
+"Ekonomia bazohet në industri dhe turizëm. Veriu është më i zhvilluar.<br><br>Moda dhe eksportet janë shumë të forta.",
+"Kultura lidhet me Romën e lashtë. Ka art dhe arkitekturë të jashtëzakonshme.<br><br>Kuzhina italiane është shumë e famshme.")],
+
+["Latvia",56.94,24.1,info("Letonia","🇱🇻","2004","Riga","~2M","Letonisht","Euro",
+"Letonia ka pyje dhe bregdet në Baltik. Terreni është i sheshtë.<br><br>Klima është e freskët.",
+"Ekonomia bazohet në shërbime dhe tregti. Po zhvillohet gradualisht.<br><br>Investimet janë në rritje.",
+"Kultura ka folklor dhe muzikë tradicionale. Festat janë shumë të rëndësishme.<br><br>Riga është qytet historik.")],
+
+["Lithuania",54.68,25.27,info("Lituania","🇱🇹","2004","Vilnius","~2.8M","Lituanisht","Euro",
+"Lituania ka fusha dhe pyje të mëdha. Ka dalje në Baltik.<br><br>Klima është kontinentale.",
+"Ekonomia është në rritje me industri dhe teknologji. Eksportet janë të rëndësishme.<br><br>Investimet e huaja po rriten.",
+"Kultura është historike dhe tradicionale. Ka shumë kisha.<br><br>Traditat kombëtare janë të forta.")],
+
+["Luxembourg",49.61,6.13,info("Luksemburgu","🇱🇺","1958","Luksemburg","~0.6M","3 gjuhë","Euro",
+"Vend i vogël me terren kodrinor. Pozicion shumë strategjik.<br><br>Ka peizazhe të gjelbra.",
+"Ekonomia është financiare dhe bankare. Një nga më të pasurat në botë.<br><br>Sektori bankar dominon.",
+"Kultura është shumëgjuhëshe. Ka ndikime franceze dhe gjermane.<br><br>Traditat janë të ruajtura.")],
+
+["Malta",35.89,14.51,info("Malta","🇲🇹","2004","Valletta","~0.5M","Malteze","Euro",
+"Ishull mesdhetar me klimë të ngrohtë. Terren shkëmbor.<br><br>Ka bregdet turistik.",
+"Ekonomia bazohet në turizëm dhe shërbime financiare. Turizmi është kryesor.<br><br>Transporti detar është i rëndësishëm.",
+"Kultura është mesdhetare dhe historike. Ka ndikime italiane.<br><br>Festat fetare janë shumë të forta.")],
+
+["Netherlands",52.36,4.9,info("Holanda","🇳🇱","1958","Amsterdami","~17M","Holandisht","Euro",
+"Holanda është vend i sheshtë me kanale. Një pjesë është nën nivelin e detit.<br><br>Klima është oqeanike.",
+"Ekonomia është shumë inovative. Tregtia dhe portet janë shumë të zhvilluara.<br><br>Roterdami është port kryesor.",
+"Kultura është moderne dhe liberale. Van Gogh është simbol artistik.<br><br>Kanalet janë shumë turistike.")],
+
+["Poland",52.22,21.01,info("Polonia","🇵🇱","2004","Varshava","~38M","Polonisht","Zloty",
+"Polonia ka fusha dhe male në jug. Terreni është i larmishëm.<br><br>Klima është kontinentale.",
+"Ekonomia është në rritje me industri dhe shërbime. Investimet e huaja janë të mëdha.<br><br>Prodhimi industrial është i fortë.",
+"Kultura është tradicionale dhe historike. Ka qytete të vjetra.<br><br>Muzika dhe letërsia janë të zhvilluara.")],
+
+["Portugal",38.72,-9.13,info("Portugalia","🇵🇹","1986","Lisbona","~10M","Portugalisht","Euro",
+"Portugalia ka bregdet të gjatë Atlantik. Terreni është malor dhe fushor.<br><br>Klima është mesdhetare.",
+"Ekonomia bazohet në turizëm dhe bujqësi. Turizmi bregdetar është shumë i fortë.<br><br>Eksportet janë në rritje.",
+"Kultura është detare dhe tradicionale. Fado është muzikë tipike.<br><br>Qytetet historike janë turistike.")],
+
+["Romania",44.42,26.1,info("Rumania","🇷🇴","2007","Bukureshti","~19M","Rumanisht","Leu",
+"Rumania ka Karpatet dhe fusha të mëdha. Terren i larmishëm.<br><br>Klima është kontinentale.",
+"Ekonomia është në zhvillim me industri dhe IT. Investimet po rriten.<br><br>Eksportet janë të rëndësishme.",
+"Kultura është folklorike dhe historike. Ka kështjella të shumta.<br><br>Muzika tradicionale është e fortë.")],
+
+["Slovakia",48.14,17.1,info("Sllovakia","🇸🇰","2004","Bratislava","~5M","Sllovakisht","Euro",
+"Vend malor me Karpatet. Ka shumë pyje.<br><br>Klima është kontinentale.",
+"Ekonomia bazohet në industri automobilistike. Prodhimi është kyç.<br><br>Eksportet janë të rëndësishme.",
+"Kultura është folklorike. Ka shumë festa tradicionale.<br><br>Muzika popullore është e fortë.")],
+
+["Slovenia",46.05,14.5,info("Sllovenia","🇸🇮","2004","Lubjana","~2M","Sllovenisht","Euro",
+"Sllovenia ka Alpe dhe bregdet. Vend shumë i gjelbër.<br><br>Klima është alpine dhe mesdhetare.",
+"Ekonomia është e qëndrueshme dhe e zhvilluar. Turizmi është shumë i rëndësishëm.<br><br>Eksportet janë në rritje.",
+"Kultura është e lidhur me natyrën. Ka tradita alpine.<br><br>Festat kulturore janë të shumta.")],
+
+["Spain",40.41,-3.7,info("Spanja","🇪🇸","1986","Madridi","~47M","Spanjisht","Euro",
+"Spanja ka male dhe bregdet të madh. Klima është e ngrohtë.<br><br>Ishujt janë shumë turistike.",
+"Ekonomia bazohet në turizëm dhe industri. Turizmi është sektor kryesor.<br><br>Qytetet janë shumë të zhvilluara.",
+"Kultura përfshin flamenco dhe festa. Madridi është qendër kulturore.<br><br>Traditat janë shumë të forta.")],
+
+["Sweden",59.32,18.06,info("Suedia","🇸🇪","1995","Stokholmi","~10M","Suedisht","Krona",
+"Suedia ka pyje dhe liqene të shumta. Klima është e ftohtë në veri.<br><br>Territori është shumë i gjelbër.",
+"Ekonomia është shumë e zhvilluar në teknologji. Inovacioni është kyç.<br><br>Sistemi social është shumë i fortë.",
+"Kultura fokusohet në dizajn dhe barazi. Stokholmi është modern.<br><br>Muzika dhe moda janë të njohura.")]
 
 ];
 
@@ -195,6 +196,7 @@ countries.forEach(function(c){
     "<div class='card'>"+c[3]+"</div>";
   });
 });
+
 </script>
 
 </body>
