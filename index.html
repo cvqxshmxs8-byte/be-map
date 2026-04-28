@@ -14,6 +14,8 @@ header { padding:15px; text-align:center; font-size:24px; font-weight:bold; back
 #map { height:calc(100vh - 60px); width:70%; }
 #panel { width:30%; padding:20px; background:#111827; overflow:auto; }
 .card { background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; }
+.section { margin-top:12px; }
+.section b { color:#60a5fa; }
 </style>
 </head>
 
@@ -26,7 +28,7 @@ header { padding:15px; text-align:center; font-size:24px; font-weight:bold; back
 <div id="panel">
 <div class="card">
 <h2>Kliko një shtet</h2>
-<p>Shfaqet informacion i plotë + viti i anëtarësimit.</p>
+<p>Paneli do mbushet me informacion të plotë.</p>
 </div>
 </div>
 </div>
@@ -35,61 +37,154 @@ header { padding:15px; text-align:center; font-size:24px; font-weight:bold; back
 var map = L.map('map').setView([54,15],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+function info(n,f,y,c,p,l,m,g,e,cu){
+return f+" <h2>"+n+"</h2>"
++"<div class='section'><b>📅 Anëtarësimi:</b> "+y+"</div>"
++"<div class='section'><b>📍 Kryeqyteti:</b> "+c+"</div>"
++"<div class='section'><b>👥 Popullsia:</b> "+p+"</div>"
++"<div class='section'><b>🗣️ Gjuha:</b> "+l+"</div>"
++"<div class='section'><b>💰 Monedha:</b> "+m+"</div>"
++"<div class='section'><b>🌍 Gjeografia:</b><br>"+g+"</div>"
++"<div class='section'><b>💼 Ekonomia:</b><br>"+e+"</div>"
++"<div class='section'><b>🎭 Kultura:</b><br>"+cu+"</div>";
+}
+
 var countries = [
 
-["Austria",48.2082,16.3738,"🇦🇹 Austria<br><br><b>📅 Anëtarësimi:</b> 1995<br><br>Kryeqyteti: Vjena<br>Popullsia: ~9 milion<br>Gjuha: Gjermanisht<br>Monedha: Euro<br><br>Vend alpin shumë i zhvilluar me ekonomi të fortë dhe turizëm."],
+["Austria",48.2,16.37,info("Austria","🇦🇹","1995","Vjena","~9M","Gjermanisht","Euro",
+"Vend alpin me male dhe natyrë të bukur.",
+"Ekonomi e zhvilluar dhe turizëm i fortë.",
+"Muzikë klasike dhe tradita europiane.")],
 
-["Germany",52.52,13.405,"🇩🇪 Gjermania<br><br><b>📅 Anëtarësimi:</b> 1958<br><br>Kryeqyteti: Berlini<br>Popullsia: ~83 milion<br>Gjuha: Gjermanisht<br>Monedha: Euro<br><br>Ekonomia më e madhe në Evropë dhe fuqi industriale."] ,
+["Germany",52.52,13.405,info("Gjermania","🇩🇪","1958","Berlini","~83M","Gjermanisht","Euro",
+"Vend në Evropën Qendrore me lumenj të mëdhenj.",
+"Industria më e fortë në Evropë.",
+"Kulturë teknologjike dhe historike.")],
 
-["France",48.8566,2.3522,"🇫🇷 Franca<br><br><b>📅 Anëtarësimi:</b> 1958<br><br>Kryeqyteti: Parisi<br>Popullsia: ~67 milion<br>Gjuha: Frëngjisht<br>Monedha: Euro<br><br>Një nga vendet më të rëndësishme në BE."] ,
+["France",48.85,2.35,info("Franca","🇫🇷","1958","Parisi","~67M","Frëngjisht","Euro",
+"Vend i madh me rajone të ndryshme.",
+"Turizëm dhe bujqësi të zhvilluar.",
+"Modë, art dhe kuzhinë.")],
 
-["Italy",41.9028,12.4964,"🇮🇹 Italia<br><br><b>📅 Anëtarësimi:</b> 1958<br><br>Kryeqyteti: Roma<br>Popullsia: ~59 milion<br>Gjuha: Italisht<br>Monedha: Euro<br><br>Histori dhe kulturë e pasur."] ,
+["Italy",41.9,12.49,info("Italia","🇮🇹","1958","Roma","~59M","Italisht","Euro",
+"Gadishull mesdhetar me klimë të ngrohtë.",
+"Ekonomi në industri dhe turizëm.",
+"Histori romake dhe art.")],
 
-["Spain",40.4168,-3.7038,"🇪🇸 Spanja<br><br><b>📅 Anëtarësimi:</b> 1986<br><br>Kryeqyteti: Madridi<br>Popullsia: ~47 milion<br>Gjuha: Spanjisht<br>Monedha: Euro<br><br>Turizëm shumë i zhvilluar."] ,
+["Spain",40.41,-3.7,info("Spanja","🇪🇸","1986","Madridi","~47M","Spanjisht","Euro",
+"Vend në jugperëndim.",
+"Turizëm shumë i fortë.",
+"Flamenco dhe festa.")],
 
-["Belgium",50.8503,4.3517,"🇧🇪 Belgjika<br><br><b>📅 Anëtarësimi:</b> 1958<br><br>Kryeqyteti: Brukseli<br>Popullsia: ~11 milion<br>Monedha: Euro<br><br>Qendër politike e BE-së."] ,
+["Belgium",50.85,4.35,info("Belgjika","🇧🇪","1958","Brukseli","~11M","Frëngjisht/Holandisht","Euro",
+"Vend i vogël në Evropë.",
+"Qendër politike e BE.",
+"Kulturë shumëgjuhëshe.")],
 
-["Netherlands",52.3676,4.9041,"🇳🇱 Holanda<br><br><b>📅 Anëtarësimi:</b> 1958<br><br>Kryeqyteti: Amsterdami<br>Popullsia: ~17 milion<br>Monedha: Euro<br><br>Vend shumë i zhvilluar dhe inovativ."] ,
+["Netherlands",52.36,4.9,info("Holanda","🇳🇱","1958","Amsterdami","~17M","Holandisht","Euro",
+"Vend i sheshtë me kanale.",
+"Ekonomi inovative.",
+"Kulturë liberale.")],
 
-["Luxembourg",49.6116,6.1319,"🇱🇺 Luksemburgu<br><br><b>📅 Anëtarësimi:</b> 1958<br><br>Popullsia: ~650 mijë<br>Monedha: Euro<br><br>Qendër financiare."] ,
+["Luxembourg",49.61,6.13,info("Luksemburgu","🇱🇺","1958","Luksemburg","~0.6M","3 gjuhë","Euro",
+"Vend shumë i vogël.",
+"Qendër financiare.",
+"Standard jetese shumë i lartë.")],
 
-["Denmark",55.6761,12.5683,"🇩🇰 Danimarka<br><br><b>📅 Anëtarësimi:</b> 1973<br><br>Kryeqyteti: Kopenhaga<br>Popullsia: ~6 milion<br><br>Një nga vendet më të lumtura."] ,
+["Denmark",55.67,12.56,info("Danimarka","🇩🇰","1973","Kopenhaga","~6M","Daneze","Krone",
+"Vend nordik me ishuj.",
+"Ekonomi shumë e zhvilluar.",
+"Njerëz shumë të lumtur.")],
 
-["Ireland",53.3498,-6.2603,"🇮🇪 Irlanda<br><br><b>📅 Anëtarësimi:</b> 1973<br><br>Kryeqyteti: Dublini<br>Popullsia: ~5 milion<br><br>Ekonomi e zhvilluar teknologjike."] ,
+["Ireland",53.34,-6.26,info("Irlanda","🇮🇪","1973","Dublini","~5M","Anglisht","Euro",
+"Ishull në Atlantik.",
+"Teknologji dhe kompani të mëdha.",
+"Kulturë tradicionale.")],
 
-["Greece",37.9838,23.7275,"🇬🇷 Greqia<br><br><b>📅 Anëtarësimi:</b> 1981<br><br>Kryeqyteti: Athina<br>Popullsia: ~10 milion<br><br>Djepi i qytetërimit."] ,
+["Greece",37.98,23.72,info("Greqia","🇬🇷","1981","Athina","~10M","Greqisht","Euro",
+"Vend mesdhetar.",
+"Turizëm i fortë.",
+"Histori antike.")],
 
-["Portugal",38.7223,-9.1393,"🇵🇹 Portugalia<br><br><b>📅 Anëtarësimi:</b> 1986<br><br>Kryeqyteti: Lisbona<br>Popullsia: ~10 milion<br><br>Vend bregdetar."] ,
+["Portugal",38.72,-9.13,info("Portugalia","🇵🇹","1986","Lisbona","~10M","Portugalisht","Euro",
+"Bregdet i gjatë.",
+"Ekonomi në rritje.",
+"Kulturë detare.")],
 
-["Sweden",59.3293,18.0686,"🇸🇪 Suedia<br><br><b>📅 Anëtarësimi:</b> 1995<br><br>Kryeqyteti: Stokholmi<br>Popullsia: ~10 milion<br><br>Nivel i lartë jetese."] ,
+["Sweden",59.32,18.06,info("Suedia","🇸🇪","1995","Stokholmi","~10M","Suedisht","Krona",
+"Vend nordik.",
+"Ekonomi shumë e fortë.",
+"Jetesë e lartë.")],
 
-["Finland",60.1699,24.9384,"🇫🇮 Finlanda<br><br><b>📅 Anëtarësimi:</b> 1995<br><br>Kryeqyteti: Helsinki<br>Popullsia: ~5.5 milion<br><br>Sistem arsimor shumë i fortë."] ,
+["Finland",60.16,24.93,info("Finlanda","🇫🇮","1995","Helsinki","~5.5M","Finlandisht","Euro",
+"Shumë liqene dhe pyje.",
+"Arsim shumë i mirë.",
+"Kulturë e qetë.")],
 
-["Poland",52.2297,21.0122,"🇵🇱 Polonia<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Varshava<br>Popullsia: ~38 milion<br><br>Ekonomi në rritje."] ,
+["Poland",52.22,21.01,info("Polonia","🇵🇱","2004","Varshava","~38M","Polonisht","Zloty",
+"Vend i madh në lindje.",
+"Ekonomi në rritje.",
+"Kulturë tradicionale.")],
 
-["Czechia",50.0755,14.4378,"🇨🇿 Çekia<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Praga<br><br>Ekonomi industriale."] ,
+["Czechia",50.07,14.43,info("Çekia","🇨🇿","2004","Praga","~10M","Çekisht","Koruna",
+"Vend në Evropën Qendrore.",
+"Industri e fortë.",
+"Arkitekturë historike.")],
 
-["Hungary",47.4979,19.0402,"🇭🇺 Hungaria<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Budapesti"] ,
+["Hungary",47.49,19.04,info("Hungaria","🇭🇺","2004","Budapesti","~9M","Hungarisht","Forint",
+"Vend pa dalje në det.",
+"Ekonomi në zhvillim.",
+"Banja termale.")],
 
-["Slovakia",48.1486,17.1077,"🇸🇰 Sllovakia<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Bratislava"] ,
+["Slovakia",48.14,17.1,info("Sllovakia","🇸🇰","2004","Bratislava","~5M","Sllovakisht","Euro",
+"Vend malor.",
+"Industri automobilistike.",
+"Kulturë tradicionale.")],
 
-["Slovenia",46.0569,14.5058,"🇸🇮 Sllovenia<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Lubjana"] ,
+["Slovenia",46.05,14.5,info("Sllovenia","🇸🇮","2004","Lubjana","~2M","Sllovenisht","Euro",
+"Vend i gjelbër.",
+"Ekonomi e qëndrueshme.",
+"Natyra e bukur.")],
 
-["Estonia",59.437,24.7536,"🇪🇪 Estonia<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Talini"] ,
+["Estonia",59.43,24.75,info("Estonia","🇪🇪","2004","Talini","~1M","Estonisht","Euro",
+"Vend baltik.",
+"Shumë digjital.",
+"Kulturë moderne.")],
 
-["Latvia",56.9496,24.1052,"🇱🇻 Letonia<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Riga"] ,
+["Latvia",56.94,24.1,info("Letonia","🇱🇻","2004","Riga","~2M","Letonisht","Euro",
+"Vend baltik.",
+"Ekonomi në zhvillim.",
+"Kulturë tradicionale.")],
 
-["Lithuania",54.6872,25.2797,"🇱🇹 Lituania<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Vilnius"] ,
+["Lithuania",54.68,25.27,info("Lituania","🇱🇹","2004","Vilnius","~2.8M","Lituanisht","Euro",
+"Vend baltik.",
+"Ekonomi në rritje.",
+"Kulturë historike.")],
 
-["Malta",35.8989,14.5146,"🇲🇹 Malta<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Valletta"] ,
+["Malta",35.89,14.51,info("Malta","🇲🇹","2004","Valletta","~0.5M","Malteze","Euro",
+"Ishull i vogël.",
+"Turizëm shumë i fortë.",
+"Kulturë mesdhetare.")],
 
-["Cyprus",35.1856,33.3823,"🇨🇾 Qipro<br><br><b>📅 Anëtarësimi:</b> 2004<br><br>Kryeqyteti: Nikosia"] ,
+["Cyprus",35.18,33.38,info("Qipro","🇨🇾","2004","Nikosia","~1M","Greqisht","Euro",
+"Ishull mesdhetar.",
+"Ekonomi turistike.",
+"Kulturë greke.")],
 
-["Romania",44.4268,26.1025,"🇷🇴 Rumania<br><br><b>📅 Anëtarësimi:</b> 2007<br><br>Kryeqyteti: Bukureshti"] ,
+["Romania",44.42,26.1,info("Rumania","🇷🇴","2007","Bukureshti","~19M","Rumanisht","Leu",
+"Vend i madh lindor.",
+"Ekonomi në zhvillim.",
+"Kulturë folklorike.")],
 
-["Bulgaria",42.6977,23.3219,"🇧🇬 Bullgaria<br><br><b>📅 Anëtarësimi:</b> 2007<br><br>Kryeqyteti: Sofja"] ,
+["Bulgaria",42.69,23.32,info("Bullgaria","🇧🇬","2007","Sofja","~6M","Bullgarisht","Lev",
+"Vend ballkanik.",
+"Ekonomi në rritje.",
+"Kulturë e pasur.")],
 
-["Croatia",45.815,15.9819,"🇭🇷 Kroacia<br><br><b>📅 Anëtarësimi:</b> 2013<br><br>Kryeqyteti: Zagrebi"]
+["Croatia",45.81,15.98,info("Kroacia","🇭🇷","2013","Zagrebi","~4M","Kroatisht","Euro",
+"Bregdet Adriatik.",
+"Turizëm shumë i zhvilluar.",
+"Kulturë mesdhetare.")]
 
 ];
 
@@ -97,7 +192,7 @@ countries.forEach(function(c){
   var marker = L.marker([c[1],c[2]]).addTo(map);
   marker.on('click', function(){
     document.getElementById("panel").innerHTML =
-    "<div class='card'><h2>"+c[0]+"</h2><p>"+c[3]+"</p></div>";
+    "<div class='card'>"+c[3]+"</div>";
   });
 });
 </script>
