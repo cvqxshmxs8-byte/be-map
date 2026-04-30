@@ -1,124 +1,203 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shqipëria dhe Bashkimi Evropian</title>
+<meta charset="utf-8" />
+<title>Bashkimi Europian</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
-/* STILI BAZË */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #192841;
-    color: #ffffff;
-}
-
-/* NAVIGIMI */
-.navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #0A1F44;
-    padding: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-}
-
-.navbar a {
-    color: #ffffff;
-    text-decoration: none;
-    margin: 0 15px;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 18px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.navbar a:hover {
-    background-color: #2563eb;
-    color: #ffffff;
-}
-
-/* SEKSIONET */
-.section {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.section h1 {
-    font-size: 38px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-}
-
-.section p {
-    max-width: 800px;
-    margin: 10px auto;
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-.section img {
-    max-width: 400px;
-    border-radius: 15px;
-    margin: 20px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
-
-/* Footer */
-.footer {
-    background: #0A1F44;
-    padding: 10px 0;
-    text-align: center;
-    color: #b0b0b0;
-}
-
-.footer a {
-    text-decoration: none;
-    color: #2563eb;
-}
+body { margin:0; font-family:-apple-system,sans-serif; background:#0f172a; color:white; }
+header { padding:15px; text-align:center; font-size:24px; font-weight:bold; background:linear-gradient(90deg,#2563eb,#1e3a8a);}
+.container { display:flex; }
+#map { height:calc(100vh - 60px); width:70%; }
+#panel { width:30%; padding:20px; background:#111827; overflow:auto; }
+.card { background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; }
+.section { margin-top:12px; }
+.section b { color:#60a5fa; }
 </style>
 </head>
+
 <body>
 
-<!-- NAVIGIMI -->
-<div class="navbar">
-    <a href="#shqiperia">Shqipëria</a>
-    <a href="#be">Bashkimi Evropian</a>
-    <a href="#integrimi">Integrimi</a>
+<header> Bashkimi Europian - Harta Interaktive</header>
+
+<div class="container">
+<div id="map"></div>
+<div id="panel">
+<div class="card">
+<h2>Kliko një shtet</h2>
+<p>Informacioni shfaqet këtu.</p>
+</div>
+</div>
 </div>
 
-<!-- FAQJA 1: SHQIPËRIA -->
-<div id="shqiperia" class="section" style="background-color: #06283D;">
-    <h1>🇦🇱 Shqipëria</h1>
-    <p>Shqipëria është një vend i vogël në juglindje të Evropës, i njohur për historinë e tij të pasur, kulturën e pasur dhe bukuritë natyrore të mahnitshme.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Albanian_Alps.png" alt="Alpet Shqiptare">
-    <p>Vizito plazhet e mrekullueshme të Rivierës Shqiptare ose qytetet historike si Gjirokastra dhe Berati.</p>
-</div>
+<script>
 
-<!-- FAQJA 2: BASHKIMI EVROPIAN -->
-<div id="be" class="section" style="background-color: #2563eb;">
-    <h1>🇪🇺 Bashkimi Evropian</h1>
-    <p>Bashkimi Evropian është një organizatë politike dhe ekonomike e 27 shteteve anëtare që bashkëpunojnë për stabilitet, paqe dhe mirëqenie për popujt e saj.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="Flamuri i Bashkimit Evropian">
-    <p>Institucione kryesore si Parlamenti dhe Komisioni Evropian udhëheqin politikat për të ardhmen e Evropës.</p>
-</div>
+var map = L.map('map').setView([54,15],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-<!-- FAQJA 3: INTEGRIMI -->
-<div id="integrimi" class="section" style="background-color: #1e293b;">
-    <h1>⭐ Integrimi</h1>
-    <p>Procesi i integrimit për Shqipërinë për të hyrë në Bashkimin Evropian kërkon reforma të rëndësishme ekonomike, politike dhe sociale.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Europe_Albania.png" alt="Harta e Shqipërisë dhe BE-së">
-    <p>Përkushtimi ndaj luftës kundër korrupsionit, forcimi i demokracisë dhe zhvillimi ekonomik janë prioritete kyçe për integrimin.</p>
-</div>
+function info(n,f,y,c,p,l,m,g,e,cu){
+return f+" <h2>"+n+"</h2>"
++"<div class='section'><b>📅 Anëtarësimi:</b> "+y+"</div>"
++"<div class='section'><b>📍 Kryeqyteti:</b> "+c+"</div>"
++"<div class='section'><b>👥 Popullsia:</b> "+p+"</div>"
++"<div class='section'><b>🗣️ Gjuha:</b> "+l+"</div>"
++"<div class='section'><b>💰 Monedha:</b> "+m+"</div>"
++"<div class='section'><b>🌍 Gjeografia:</b><br>"+g+"</div>"
++"<div class='section'><b>💼 Ekonomia:</b><br>"+e+"</div>"
++"<div class='section'><b>🎭 Kultura:</b><br>"+cu+"</div>";
+}
 
-<!-- FOOTER -->
-<div class="footer">
-    <p>Websajti realizuar nga <a href="https://github.com/cvqxshmxs8-byte">cvqxshmxs8-byte</a> | Shqipëria dhe Bashkimi Evropian</p>
-</div>
+var countries = [
+
+["Austria",48.2,16.37,info("Austria","🇦🇹","1995","Vjena","~9M","Gjermanisht","Euro",
+"Austria është një shtet kontinental (pa dalje në det) me një sipërfaqe prej 83,882 km2. Kufizohet nga Gjermania, Republika Çeke, Sllovakia, Hungaria, Sllovenia, Italia, Zvicra dhe Lihtenshtajni. Terreni është kryesisht malor, me Alpet që mbulojnë një pjesë të madhe të vendit.<br><br>Klima varion nga alpine në veri në më të butë në jug, duke krijuar kushte ideale për turizëm.",
+"Ekonomia është shumë e zhvilluar dhe bazohet në industri, shërbime dhe turizëm. Sektori bankar dhe eksportet luajnë rol të madh në stabilitetin ekonomik.<br><br>Turizmi malor dhe kulturor është një nga burimet kryesore të të ardhurave.",
+"Kultura austriake është e lidhur ngushtë me muzikën klasike dhe artin evropian. Vjena është një nga qendrat më të rëndësishme kulturore në botë.<br><br>Traditat dhe festivalet muzikore janë pjesë e identitetit kombëtar.")],
+
+["Belgium",50.85,4.35,info("Belgjika","🇧🇪","1958","Brukseli","~11M","Frëngjisht/Holandisht","Euro",
+"Ndodhet në Evropën Perëndimore, kufizohet me Holandën, Gjermaninë, Luksemburgun, Francën dhe Detin Verior. Terreni përbëhet nga ultësira bregdetare, rrafshnalta qendrore dhe kodra/pyje në Ardenet (jug). <br><br>Ka rrjet të zhvilluar lumenjsh dhe qytetesh.",
+"Belgjika ka një ekonomi të zhvilluar, të bazuar në shërbime (rreth 75%), industri (rreth 23%), dhe logjistikë. Porti i Antwerp-it është një nga më të mëdhenjtë në Evropë. Është një shtet industrial i dalluar me traditë në tekstile, metalurgji dhe mekanikë.<br><br>Financat dhe administrata janë sektorë kryesorë.",
+"Njihet për ndikimin e përzier gjermanik dhe latin, me një trashëgimi të pasur kulturore (arkitekturë mesjetare, art). Belgjika është e famshme për çokollatën, waffles, birrën dhe si vendi i origjinës së patateve të skuqura.<br><br>Qytetet mesjetare janë shumë turistike.")],
+
+["Bulgaria",42.69,23.32,info("Bullgaria","🇧🇬","2007","Sofja","~6M","Bullgarisht","Lev",
+"Ndodhet në Evropën Juglindore, në pjesën lindore të Gadishullit Ballkanik. Kufizohet nga Rumania në veri, Serbia dhe Maqedonia e Veriut në perëndim, Greqia dhe Turqia në jug, dhe ka dalje në Detin e Zi në lindje. Relievi është i larmishëm, me vargmalet e Stara Planinës, Rodopeve dhe Rilës (ku ndodhet maja Musala, më e larta në Ballkan).<br><br>Territori është i pasur me natyrë dhe burime.",
+"Bullgaria ka një ekonomi të tregut në zhvillim. Nga janari 2025, ajo u bë anëtare e plotë e Zonës Shengen, duke lehtësuar lëvizjen e lirë të mallrave dhe njerëzve. Sektorët kryesorë përfshijnë industrinë, bujqësinë dhe një sektor në rritje të teknologjisë (IT).<br><br>Sektori IT po rritet shpejt.",
+"Bullgaria ka një trashëgimi të pasur kulturore, me ndikime trake, sllave, bizantine dhe osmane. Është vendi i alfabetit cirilik. Kultura është e njohur për muzikën popullore, traditat ortodokse dhe festivale të tilla si Rozhen. <br><br>Historia dhe muzika popullore janë shumë të forta.")],
+
+["Croatia",45.81,15.98,info("Kroacia","🇭🇷","2013","Zagrebi","~4M","Kroatisht","Euro",
+"Ndodhet në Evropën Juglindore, në udhëkryq midis Evropës Qendrore dhe Mesdheut. Ka një vijë bregdetare të gjatë në detin Adriatik dhe kufizohet me Slloveninë, Hungarinë, Serbinë, Bosnjë-Hercegovinën dhe Malin e Zi.<br><br>Klima është mesdhetare e butë.",
+"Rritja ekonomike pritet të jetë solide, e nxitur nga turizmi, shërbimet dhe investimet. Kroacia është anëtare e zonës Euro dhe zonës Shengen.<br><br>Industria është në zhvillim.",
+"Ndikim i fortë nga kultura mesdhetare, ajo e Evropës Qendrore (Mitteleuropa) dhe trashëgimia ilire. <br><br>Traditat janë të ruajtura mirë.")],
+
+["Cyprus",35.18,33.38,info("Qipro","🇨🇾","2004","Nikosia","~1M","Greqisht","Euro",
+"Qiproja është një ishull në detin Mesdhe (i treti për nga madhësia), i ndarë de facto që nga viti 1974. Ai shtrihet në jug të Turqisë dhe në perëndim të Sirisë.<br><br>Ka pozicion strategjik në Mesdhe.",
+"Ekonomia e Qipros është e zhvilluar, e bazuar në sektorin e shërbimeve (turizëm, shërbime financiare, transport detar). Qiproja ka marrë presidencën e BE-së për gjashtëmujorin e parë të vitit 2026.<br><br>Turizmi është burim kryesor.",
+"Kultura qipriote është një përzierje e traditave greke, bizantine dhe mesdhetare, me ndikime të forta nga sundimet e mëparshme. Njihet për mikpritjen, artin, kuzhinën (si djathi Halloumi) dhe trashëgiminë e pasur arkeologjike.<br><br>Traditat mesdhetare janë shumë të forta.")],
+
+["Czechia",50.07,14.43,info("Çekia","🇨🇿","2004","Praga","~10M","Çekisht","Koruna",
+"Çekia është një shtet në Evropën Qendrore pa dalje në det, që kufizohet nga Gjermania, Austria, Sllovakia dhe Polonia. Vendi përbëhet nga rajonet historike të Bohemisë, Moravisë dhe Silezisë Çeke. <br><br>Është vend pa dalje në det.",
+"Ekonomia çeke është një ekonomi e zhvilluar, e fokusuar në industri (veçanërisht automobilave), teknologji dhe bujqësi. Për vitin 2026, parashikohet një rritje ekonomike e moderuar, me konsumin e brendshëm si shtytësi kryesor.<br><br>Eksportet janë shumë të forta.",
+"Çekia ka një kulturë të pasur me ndikime evropiane, të njohur për muzikën klasike, letërsinë (Franz Kafka), arkitekturën historike (Praga), dhe traditën e prodhimit të birrës.<br><br>Traditat janë shumë të ruajtura.")],
+
+["Denmark",55.67,12.56,info("Danimarka","🇩🇰","1973","Kopenhaga","~6M","Daneze","Krone",
+"Ndodhet në Evropën Veriore (Skandinavi). Përbëhet nga gadishulli Jutland dhe 443 ishuj të emërtuar (më të mëdhenjtë janë Zeland dhe Fyn). Kufizohet në jug vetëm me Gjermaninë. Është vend kryesisht i rrafshët me bregdet ranor.<br><br>Klima është e freskët dhe me erë.",
+"Një ekonomi shumë e zhvilluar e tregut të lirë me një rrjet të fortë sigurie sociale (shtet mirëqenieje). Danimarka njihet për sektorët e energjisë së rinovueshme, bujqësinë intensive, farmaceutikën dhe transportin detar.<br><br>Standardi i jetesës është shumë i lartë.",
+"Shoqëri progresive, egalitare dhe liberal-sociale. Njihet për dizajnin modern, trashëgiminë Vikinge, dhe konceptin \"hygge\" (komoditet/rehati).<br><br>Traditat nordike janë shumë të forta.")],
+
+["Estonia",59.43,24.75,info("Estonia","🇪🇪","2004","Talini","~1M","Estonisht","Euro",
+"Ndodhet në Evropën Veriore, kufizohet me Detin Baltik, Rusinë dhe Letoninë. Ka mbi 2,000 ishuj dhe peizazhe të pasura me pyje. <br><br>Klima është e ftohtë dhe e lagësht.",
+"Një ekonomi e zhvilluar, e fokusuar te teknologjia, inovacioni dhe e-qeverisja. Estonia është pioniere në shërbimet digjitale dhe anëtare e Eurozonës dhe OECD.<br><br>Start-up-et janë shumë të zhvilluara.",
+"Kultura estoneze ndikohet nga trashëgimia nordike dhe baltike, me theks te traditat e këngëve, folklori dhe një shoqëri moderne me mentalitet evropian. Ajo ka një histori të ndikuar nga sundimet suedeze, gjermane dhe ruse, duke u shkëputur përfundimisht nga BRSS në 1991.<br><br>Traditat janë të ruajtura.")],
+
+["Finland",60.16,24.93,info("Finlanda","🇫🇮","1995","Helsinki","~5.5M","Finlandisht","Euro",
+"Finlanda ka shumë liqene dhe pyje. Klima është shumë e ftohtë në dimër.<br><br>Territori është pak i populluar.",
+"Ekonomia është e fortë në teknologji dhe arsim. Industria e pylltarisë është e rëndësishme.<br><br>Inovacioni është shumë i zhvilluar.",
+"Kultura është e qetë dhe natyrore. Sauna është pjesë e jetës.<br><br>Dizajni finlandez është shumë i njohur.")],
+
+["France",48.85,2.35,info("Franca","🇫🇷","1958","Parisi","~67M","Frëngjisht","Euro",
+"Ndodhet në Evropën Perëndimore, me dalje në Mesdhe, Atlantik dhe Kanalin e La Manshit. Kufizohet me Belgjikën, Luksemburgun, Gjermaninë, Zvicrën, Italinë, Monakon, Spanjën dhe Andorrën. Përfshin gjithashtu territore jashtë shtetit. <br><br>Lumenjtë janë shumë të rëndësishëm.",
+"Franca është një nga ekonomitë më të forta në botë, e dyta në BE, me industri të fuqishme, turizëm, bujqësi dhe teknologji. Në vitin 2026 pritet një rritje ekonomike prej rreth 0.9%<br><br>Eksportet janë shumë të mëdha.",
+"Franca njihet botërisht për rolin e saj në art, modë, kuzhinë, letërsi, kinema dhe filozofi. Parisi konsiderohet një qendër botërore e kulturës së lartë.<br><br>Muzetë dhe moda janë shumë të njohura.")],
+
+["Germany",52.52,13.405,info("Gjermania","🇩🇪","1957","Berlini","~83M","Gjermanisht","Euro",
+"Ndodhet në Evropën Qendrore, e rrethuar nga 9 shtete fqinje. Përbëhet nga 16 shtete federale (Bundesländer).<br><br>Është qendër gjeografike e Evropës.",
+"Ekonomia më e madhe në Evropë dhe e treta në botë. Për vitin 2026, parashikohet një rritje ekonomike e ngadaltë prej rreth 0.6% deri në 1.3% për shkak të sfidave strukturore dhe demografike.<br><br>Eksportet janë kryesore për GDP.",
+"Njihet si vendi i poetëve dhe mendimtarëve (Goethe, Schiller), me një ndikim të madh në muzikën klasike, filozofinë dhe artin botëror.<br><br>Festat si Oktoberfest janë të njohura.")],
+
+["Greece",37.98,23.72,info("Greqia","🇬🇷","1981","Athina","~10M","Greqisht","Euro",
+"Ndodhet në Evropën Juglindore, në skajin jugor të Gadishullit Ballkanik. Ajo ka vijën bregdetare më të gjatë në pellgun e Mesdheut dhe përbëhet nga një pjesë kontinentale dhe mijëra ishuj. Kufizohet me Shqipërinë, Maqedoninë e Veriut, Bullgarinë dhe Turqinë.<br><br>Ka dalje të madhe detare.",
+"Ekonomia greke, e cila është një ekonomi e zhvilluar me të ardhura të larta, bazohet kryesisht në turizëm, transport detar dhe shërbime. Në vitin 2026, ekonomia pritet të performojë mirë, me një rritje të kërkesës së brendshme dhe një borxh publik që po vjen në rënie.<br><br>Detaria është shumë e rëndësishme.",
+"Greqia konsiderohet djepi i qytetërimit perëndimor, duke qenë vendlindja e demokracisë, filozofisë perëndimore, lojërave olimpike dhe dramës. Kultura e saj është një përzierje e trashëgimisë klasike antike, ndikimit bizantin dhe modernitetit evropian.<br><br>Mitologjia greke është shumë e njohur.")],
+
+["Hungary",47.49,19.04,info("Hungaria","🇭🇺","2004","Budapesti","~9M","Hungarisht","Forint",
+"Vendi është pa dalje në det, i vendosur në Evropën Qendrore. Kufizohet me Sllovakinë, Ukrainën, Rumaninë, Serbinë, Kroacinë, Slloveninë dhe Austrinë. Relievi dominohet kryesisht nga fusha (Rrafshina e Panonisë).<br><br>Klima është kontinentale.",
+"Ka një ekonomi të orientuar nga eksporti me një sektor të fortë prodhues, veçanërisht në industrinë e automobilave dhe makinerive. Ekonomia po kalon nga paqëndrueshmëria drejt një stabilizimi gradual në vitin 2026.<br><br>Investimet po rriten.",
+"Hungaria ka një histori të pasur me kontribute të rëndësishme në arte, muzikë, letërsi, sport dhe shkencë. Është e njohur për banjat termale, arkitekturën e Budapestit dhe muzikën popullore.<br><br>Budapesti është qendër kulturore.")],
+
+["Ireland",53.34,-6.26,info("Irlanda","🇮🇪","1973","Dublini","~5M","Anglisht","Euro",
+"Ishull në Atlantikun e Veriut, i njohur si \"Ishulli Emerald\" për shkak të peizazhit të gjelbër. Ndan kufirin tokësor vetëm me Irlandën Veriore (pjesë e Mbretërisë së Bashkuar). Klima është oqeanike, e butë dhe me shira të shpeshta.<br><br>Ka fusha dhe male të ulëta.",
+"Ekonomia irlandeze pritet të jetë ndër më performueset në Evropë në vitin 2026, me rritje të qëndrueshme të mbështetur nga investimet dhe kërkesa e brendshme, pas një rritjeje të fortë të eksporteve në vitin 2025. Irlanda është një qendër e rëndësishme për kompanitë shumëkombëshe (teknologji dhe farmaceutikë). <br><br>Eksportet teknologjike janë të larta.",
+"Njihet për muzikën tradicionale, letërsinë (krenare për shkrimtarë si James Joyce dhe W.B. Yeats), birrën Guinness, dhe tradita si dita e Shën Patrikut. Kultura ka ndikim të fortë katolik, por është modernizuar ndjeshëm. <br><br>Festat janë shumë të gjalla.")],
+
+["Italy",41.9,12.49,info("Italia","🇮🇹","1958","Roma","~59M","Italisht","Euro",
+"Ndodhet në Evropën Jugore, në zemër të Detit Mesdhe, me një strukturë në formë çizmeje. Përfshin gadishullin italian, si dhe ishujt e Siçilisë dhe Sardenjës. Në veri kufizohet me Alpet (Franca, Zvicra, Austria, Sllovenia).<br><br>Klima është mesdhetare.",
+"Italia ka një nga ekonomitë më të mëdha në Evropë (anëtare e G7) dhe renditet e katërta në BE për nga Prodhimi i Brendshëm Bruto (PBB). Ekonomia mbështetet kryesisht te shërbimet dhe industria (me fokus në Veri).<br><br>Moda dhe eksportet janë shumë të forta.",
+"Njihet si djepi i Rilindjes (Rinascimento), me një ndikim të madh botëror në art, arkitekturë, letërsi, muzikë (opera) dhe modë. Vendi ka një trashëgimi të pasur historike dhe kulinare.<br><br>Kuzhina italiane është shumë e famshme.")],
+
+["Latvia",56.94,24.1,info("Letonia","🇱🇻","2004","Riga","~2M","Letonisht","Euro",
+"Ndodhet në bregun e Detit Baltik, kufizohet me Estoninë (veri), Lituaninë (jug), Rusinë (lindje) dhe Bjellorusinë (juglindje). Sipërfaqja është rreth 64,589 km².<br><br>Klima është e freskët.",
+"Letonia ka një ekonomi të zhvilluar, pjesë e eurozonës. PBB-ja pritet të rritet me rreth 1.7% – 3.1% në vitin 2026, e nxitur nga investimet dhe eksportet.<br><br>Investimet janë në rritje.",
+"Letonia ka një trashëgimi të fortë kulturore, të njohur për festivalet e këngëve dhe valleve, letërsinë dhe arkitekturën (sidomos Art Nouveau në Riga).<br><br>Riga është qytet historik.")],
+
+["Lithuania",54.68,25.27,info("Lituania","🇱🇹","2004","Vilnius","~2.8M","Lituanisht","Euro",
+"Ndodhet në Evropën Veriore, në bregun lindor të Detit Baltik. Kufizohet nga Letonia në veri, Bjellorusia në lindje dhe jug, Polonia në jug, dhe provinca ruse e Kaliningradit në jugperëndim. Relievi është kryesisht i rrafshët dhe i ulët, me shumë liqene.<br><br>Klima është kontinentale.",
+"Lituania ka një ekonomi të zhvilluar, shpesh e renditur si një ekonomi me të ardhura të larta (high-income economy). Në vitin 2026, ekonomia pritet të rritet me rreth 2.5–3.0%. Sektorët kryesorë janë IT, bioteknologjia, prodhimi dhe shërbimet. Ajo është anëtare e zonës Euro, BE-së, OECD-së dhe NATO-s. <br><br>Investimet e huaja po rriten.",
+"Kultura lituaneze ka një trashëgimi të pasur mesjetare (Dukati i Madh i Lituanisë), arkitekturë baroke dhe një pasion të fortë për basketbollin. Ajo u ndikua thellë nga Rilindja dhe Reformimi Protestant.<br><br>Traditat kombëtare janë të forta.")],
+
+["Luxembourg",49.61,6.13,info("Luksemburgu","🇱🇺","1958","Luksemburg","~0.6M","3 gjuhë","Euro",
+"Ndodhet në Evropën Perëndimore, kufizohet me Gjermaninë, Belgjikën dhe Francën. Është një vend me terren kryesisht me rrafshnalta dhe male të ulëta.<br><br>Ka peizazhe të gjelbra.",
+"Është një nga vendet më të zhvilluara në botë, me një GDP për frymë shumë të lartë. Ekonomia bazohet në financa, metalurgji (prodhim çeliku) dhe shërbime moderne.<br><br>Sektori bankar dominon.",
+"Kultura e Luksemburgut është një përzierje e ndikimeve gjermanike dhe latine (franceze), duke pasqyruar pozicionin e tij gjeografik.<br><br>Traditat janë të ruajtura.")],
+
+["Malta",35.89,14.51,info("Malta","🇲🇹","2004","Valletta","~0.5M","Malteze","Euro",
+"Një arqipelag në mes të Detit Mesdhe, rreth 80 km në jug të Sicilisë, Itali. Përbëhet nga tre ishuj kryesorë: Malta, Gozo dhe Comino, me një sipërfaqe totale prej vetëm 316 km katror.<br><br>Ka bregdet turistik.",
+"Ekonomi e zhvilluar dhe e diversifikuar, e bazuar kryesisht në shërbime, turizëm, shërbime financiare, lojërat online (i-gaming) dhe prodhim (elektronikë, farmaceutikë). Malta njihet si një nga ekonomitë me rritje të shpejtë në Evropë.<br><br>Transporti detar është i rëndësishëm.",
+"Një përzierje e pasur e ndikimeve mesdhetare, veçanërisht italiane (siçiliane) dhe britanike, për shkak të historisë së saj si koloni britanike deri në vitin 1964. Është e njohur për kishat e saj baroke, festivalet, traditat katolike romake dhe arkitekturën historike (p.sh., Valletta si Trashëgimi Botërore e UNESCO-s).<br><br>Festat fetare janë shumë të forta.")],
+
+["Netherlands",52.36,4.9,info("Holanda","🇳🇱","1958","Amsterdami","~17M","Holandisht","Euro",
+"Vendi karakterizohet nga terreni i rrafshët dhe i ulët, me rreth 25-33% të sipërfaqes nën nivelin e detit, të mbrojtur nga prita dhe diga. Laget nga Deti i Veriut dhe kufizohet me Belgjikën dhe Gjermaninë.<br><br>Klima është oqeanike.",
+"Ekonomi shumë e zhvilluar, shpesh e renditur në top 20 ekonomitë botërore (nominalisht në vendin e 18-të), me rritje të parashikuar prej 1.3% në 2026. Është eksportuesi i dytë më i madh në botë i produkteve bujqësore për nga vlera. <br><br>Roterdami është port kryesor.",
+"Njihet për tolerancën sociale, pikturën (Rembrandt, Van Gogh), laleve, mullinjtë e erës, biçikletat (më shumë biçikleta se banorë) dhe urbanizimin e lartë. <br><br>Kanalet janë shumë turistike.")],
+
+["Poland",52.22,21.01,info("Polonia","🇵🇱","2004","Varshava","~38M","Polonisht","Zloty",
+"Ndodhet në Evropën Qendrore, me dalje në Detin Baltik në veri. Kufizohet me Gjermaninë (perëndim), Çekinë dhe Sllovakinë (jug), Ukrainën dhe Bjellorusinë (lindje), dhe Lituaninë e Rusinë (Kaliningrad) në verilindje. Peizazhi dominohet nga fusha në veri (Rrafshina Polake) dhe male në jug (Karpate dhe Sudete).<br><br>Klima është kontinentale.",
+"Polonia ka një ekonomi të diversifikuar dhe me rritje të shpejtë, duke u renditur si një nga ekonomitë më të mëdha në BE (vendi i 6-të për nga PBB-ja). Sektorët kryesorë përfshijnë prodhimin e makinerive, minierat, kimikatet, përpunimin e ushqimit dhe një sektor në rritje të teknologjisë dhe lojërave video.<br><br>Prodhimi industrial është i fortë.",
+"Polonia ka një trashëgimi të pasur kulturore, me ndikime të forta katolike. Njihet për letërsinë, muzikën klasike (Frédéric Chopin), dhe qytetet historike si Krakovi (Kraków) dhe Varshava.<br><br>Muzika dhe letërsia janë të zhvilluara.")],
+
+["Portugal",38.72,-9.13,info("Portugalia","🇵🇹","1986","Lisbona","~10M","Portugalisht","Euro",
+"E vendosur në Gadishullin Iberik në Evropën Jugperëndimore, kufizohet nga Oqeani Atlantik në perëndim dhe jug, dhe nga Spanja në veri dhe lindje. Përfshin gjithashtu ishujt e Azoreve dhe Madeirës në Atlantik.<br><br>Klima është mesdhetare.",
+"Ekonomia po shfaq qëndrueshmëri me rritje, ku turizmi luan një rol kyç. Vendi është shpallur \"Destinacioni më i mirë në Evropë\" për vitin 2025. Inflacioni pritet të ulet në 2% në 2026, ndërsa borxhi publik pritet të bjerë nën 90% të PBB-së.<br><br>Eksportet janë në rritje.",
+"Kultura portugeze është një përzierje e ndikimeve romake, kelte, gjermane dhe murishte. Njihet për muzikën \"Fado\", arkitekturën \"Manueline\", ushqimet e detit dhe trashëgiminë e pasur kulturore me 15 vende të mbrojtura nga UNESCO (që nga viti 2013).<br><br>Qytetet historike janë turistike.")],
+
+["Romania",44.42,26.1,info("Rumania","🇷🇴","2007","Bukureshti","~19M","Rumanisht","Leu",
+"Ndodhet në Evropën Juglindore, në veri të Gadishullit Ballkanik, me dalje në Detin e Zi. Kufizohet me Ukrainën, Moldavinë, Hungarinë, Serbinë dhe Bullgarinë. Relievi përbëhet nga Malet Karpate, ultësira dhe delta e Danubit.<br><br>Klima është kontinentale.",
+"Rumania ka një ekonomi tregu në zhvillim, e cila është rritur ndjeshëm që nga anëtarësimi në BE. Sektorët kryesorë përfshijnë prodhimin e makinave (Dacia), IT-në, bujqësinë dhe energjinë.<br><br>Eksportet janë të rëndësishme.",
+"Kultura rumune është një përzierje e ndikimeve latine (gjuha) me traditat ortodokse bizantine dhe ndikimet ballkanike. Njihet për historinë e saj, folklorin e pasur, literaturën dhe arkitekturën në qytete si Bukureshti, Cluj-Napoca dhe Sibiu.<br><br>Muzika tradicionale është e fortë.")],
+
+["Slovakia",48.14,17.1,info("Sllovakia","🇸🇰","2004","Bratislava","~5M","Sllovakisht","Euro",
+"Është një shtet pa dalje në det, i njohur për terrenin e tij malor (malet Karpate, Tatras të Larta) në veri dhe rrafshinat pjellore në jug, duke përfshirë lumin Danub. <br><br>Klima është kontinentale.",
+"Ekonomia e Sllovakisë është industriale-agrare, me fokus të fortë në industrinë e automobilave (lider në prodhim për frymë), elektronikën, IT-në dhe metalurgjinë. Është një ekonomi e orientuar nga eksporti. <br><br>Eksportet janë të rëndësishme.",
+"Kultura sllovake është një përzierje e ndikimeve sllave, gjermane dhe hungareze. Njihet për kështjellat e shumta (si kështjella Spiš), fshatrat tradicionale (Vlkolínec), muzikën popullore dhe gatimet tradicionale si bryndzové halušky.<br><br>Muzika popullore është e fortë.")],
+
+["Slovenia",46.05,14.5,info("Sllovenia","🇸🇮","2004","Lubjana","~2M","Sllovenisht","Euro",
+"Kufizohet me Italinë në perëndim, Austrinë në veri, Hungarinë në verilindje dhe Kroacinë në jug/juglindje. Ka dalje në Detin Adriatik (kufi i shkurtër bregdetar). Vend kryesisht malor dhe i pyllëzuar (rreth 50% pyje).<br><br>Klima është alpine dhe mesdhetare.",
+"Ekonomi e zhvilluar, me industrinë si sektor kryesor (prodhim automobilash, metalurgji, farmaceutikë). Bujqësia është veprimtari dytësore.<br><br>Eksportet janë në rritje.",
+"Kultura sllovene është ndikuar nga trashëgimia sllave, por edhe nga fqinjët austriakë dhe italianë. Është një vend me tradita të forta letrare, muzikore dhe festivale kulturore, me qendër në Lubjana.<br><br>Festat kulturore janë të shumta.")],
+
+["Spain",40.41,-3.7,info("Spanja","🇪🇸","1986","Madridi","~47M","Spanjisht","Euro",
+"Ndodhet në Evropën Jugperëndimore, në Gadishullin Iberik. Kufizohet me Francën, Andorrën, Portugalinë dhe Detin Mesdhe/Oqeanin Atlantik. Përfshin Ishujt Balearik, Ishujt Kanarie dhe qytetet Ceuta e Melilla në Afrikën e Veriut.<br><br>Ishujt janë shumë turistike.",
+"Spanja po përjeton një nga rritjet më të forta ekonomike në Eurozonë, me parashikime rritjeje prej 2.4% për vitin 2026. Sektorët kryesorë janë turizmi, bujqësia, automjetet dhe shërbimet. Vendi po përfiton gjithashtu nga fondet e BE-së për rimëkëmbje (2021-2026).<br><br>Qytetet janë shumë të zhvilluara.",
+"E njohur për trashëgiminë e pasur, artin (Picasso, Dali), arkitekturën (Gaudí), muzikën Flamenco, ushqimin (tapas, paella) dhe festivalet si La Tomatina ose San Fermín.<br><br>Traditat janë shumë të forta.")],
+
+["Sweden",59.32,18.06,info("Suedia","🇸🇪","1995","Stokholmi","~10M","Suedisht","Krona",
+"Suedia është vendi i tretë më i madh në BE për nga sipërfaqja (450,295 km2). Ndodhet në Gadishullin Skandinav, kufizohet me Norvegjinë dhe Finlandën, dhe ka dalje në Detin Baltik. Pjesa veriore ka klimë polare, ndërsa pjesa jugore është më e butë.<br><br>Territori është shumë i gjelbër.",
+"Një ekonomi moderne, e orientuar nga eksporti, me industri të forta si inxhinieria (Volvo, Ericsson), telekomunikacioni, druri dhe xeherorët. Suedia është një vend i pasur me standarde të larta jetese.<br><br>Sistemi social është shumë i fortë.",
+"E njohur për barazinë gjinore, dizajnin funksional, muzikën (ABBA), dhe traditat si fika (pushimi për kafe). Suedia është një nga vendet më të lumtura në botë.<br><br>Muzika dhe moda janë të njohura.")]
+
+];
+
+countries.forEach(function(c){
+  var marker = L.marker([c[1],c[2]]).addTo(map);
+  marker.on('click', function(){
+    document.getElementById("panel").innerHTML =
+    "<div class='card'>"+c[3]+"</div>";
+  });
+});
+
+</script>
 
 </body>
-</html> 
+</html>
