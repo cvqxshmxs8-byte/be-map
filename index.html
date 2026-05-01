@@ -8,6 +8,35 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
+  .buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px; /* hapësira midis butonave */
+  margin-top: 30px;
+  margin-bottom: 40px; /* KJO krijon hapësirë nga karta poshtë */
+}
+.buttons button {
+  padding: 12px 22px;
+  border-radius: 30px;
+  border: 1px solid #c9a85d;
+  background: transparent;
+  color: #c9a85d;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttons button:hover {
+  background: rgba(201,168,93,0.1);
+}
+.card {
+  margin-top: 20px; /* ekstra hapësirë sigurie */
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid rgba(201,168,93,0.3);
+  background: linear-gradient(145deg, #0b1a2a, #0f2236);
+}
     :root {
       --gold: #c9a84c;
       --gold-light: #e8c97a;
