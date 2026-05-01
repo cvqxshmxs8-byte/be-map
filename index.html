@@ -657,6 +657,12 @@ const albaniaIcon = L.divIcon({
   html: `<div style="width:18px;height:18px;background:#c9a84c;border:2px solid #fff;border-radius:50%;box-shadow:0 0 12px rgba(201,168,76,0.9);"></div>`,
   iconSize: [18,18], iconAnchor: [9,9], className: ''
 });
+const ukIcon = L.divIcon({
+  html: `<div style="width:14px;height:14px;background:#ff4d4d;border:2px solid #fff;border-radius:50%;box-shadow:0 0 8px rgba(255,77,77,0.8);"></div>`,
+  iconSize: [14,14],
+  iconAnchor: [7,7],
+  className: ''
+});
 
 function showPanel(name, d) {
   document.getElementById('panel').innerHTML = `
@@ -677,7 +683,9 @@ function showPanel(name, d) {
 }
 
 Object.entries(countries).forEach(([name, d]) => {
-  const icon = d.isAlbania ? albaniaIcon : blueIcon;
+  let icon = blueIcon;
+if (d.isAlbania) icon = albaniaIcon;
+if (d.isUK) icon = ukIcon;
   L.marker([d.lat, d.lng], { icon }).addTo(map).on('click', () => showPanel(name, d));
 });
 
