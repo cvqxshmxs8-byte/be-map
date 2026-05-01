@@ -684,8 +684,12 @@ function showPanel(name, d) {
 
 Object.entries(countries).forEach(([name, d]) => {
   let icon = blueIcon;
-if (d.isAlbania) icon = albaniaIcon;
-if (d.isUK) icon = ukIcon;
+
+if (d.isAlbania) {
+  icon = albaniaIcon;
+} else if (d.isUK) {
+  icon = ukIcon;
+}
   L.marker([d.lat, d.lng], { icon }).addTo(map).on('click', () => showPanel(name, d));
 });
 
